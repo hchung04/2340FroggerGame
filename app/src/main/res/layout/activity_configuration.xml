@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfigurationScreen">
+    tools:context=".ConfigurationActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -39,7 +39,7 @@
             android:visibility="visible" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SUBMIT" />
