@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void changeToGameScreen(View view) {
-        setContentView(R.layout.activity_game_screen);
+    public void changeToConfigurationScreen(View view) {
+        setContentView(R.layout.activity_configuration_screen);
     }
 }
