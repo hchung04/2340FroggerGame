@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +14,10 @@ import android.widget.Toast;
 
 public class ConfigurationActivity extends AppCompatActivity {
 
-    String name;
-
-    EditText nameInput;
-    Button submit;
-
-    String gameDifficulty;
+    private String name;
+    private EditText nameInput;
+    private Button submit;
+    private String gameDifficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +31,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                 name = nameInput.getText().toString();
 
                 RadioGroup rg = (RadioGroup) findViewById(R.id.gameDifficulty);
-                if (rg.getCheckedRadioButtonId() != -1){
+                if (rg.getCheckedRadioButtonId() != -1) {
                     gameDifficulty =
                             ((RadioButton) findViewById(rg.getCheckedRadioButtonId()))
                                     .getText().toString();
@@ -42,9 +39,9 @@ public class ConfigurationActivity extends AppCompatActivity {
 
                 if (checkNameValidity(name) && gameDifficulty != null) {
                     switchToGameActivity();
-                } else if(!checkNameValidity(name)){
+                } else if (!checkNameValidity(name)) {
                     showInvalidNamePopup();
-                } else if(gameDifficulty == null){
+                } else if (gameDifficulty == null) {
                     showInvalidDifficulty();
                 }
             }
