@@ -27,12 +27,11 @@ public class ConfigurationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-
         submit = (Button) findViewById(R.id.submitButton);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 nameInput = (EditText) findViewById(R.id.nameInput);
-                String name = nameInput.getText().toString();
+                name = nameInput.getText().toString();
 
                 RadioGroup rg = (RadioGroup) findViewById(R.id.gameDifficulty);
                 if (rg.getCheckedRadioButtonId() != -1){
