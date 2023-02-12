@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class ConfigurationActivity extends AppCompatActivity {
@@ -17,6 +19,8 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     EditText nameInput;
     Button submit;
+
+    String gameDifficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +34,19 @@ public class ConfigurationActivity extends AppCompatActivity {
                 nameInput = (EditText) findViewById(R.id.nameInput);
                 String name = nameInput.getText().toString();
 
-                if (checkNameValidity(name)) {
+                RadioGroup rg = (RadioGroup) findViewById(R.id.gameDifficulty);
+                if (rg.getCheckedRadioButtonId() != -1){
+                    gameDifficulty =
+                            ((RadioButton) findViewById(rg.getCheckedRadioButtonId()))
+                                    .getText().toString();
+                }
+
+                if (checkNameValidity(name) && gameDifficulty != null) {
                     switchToGameActivity();
-                } else {
+                } else if(!checkNameValidity(name)){
                     showInvalidNamePopup();
+                } else if(gameDifficulty == null){
+                    showInvalidDifficulty();
                 }
             }
         });
@@ -46,6 +59,15 @@ public class ConfigurationActivity extends AppCompatActivity {
     private void showInvalidNamePopup() {
         Context context = getApplicationContext();
         CharSequence text = "Name cannot be empty!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private void showInvalidDifficulty() {
+        Context context = getApplicationContext();
+        CharSequence text = "Must choose a game difficulty!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
