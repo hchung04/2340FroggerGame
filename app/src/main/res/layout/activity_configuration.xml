@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/s"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfigurationActivity">
@@ -100,10 +101,7 @@
                     android:id="@+id/sprite1Bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#C7B8FF"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
+                    android:orientation="horizontal"></LinearLayout>
 
                 <ImageView
                     android:id="@+id/sprite1"
@@ -182,7 +180,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/madeline_sprite" />
+                    app:srcCompat="@drawable/esther_sprite" />
             </FrameLayout>
 
             <FrameLayout
@@ -202,7 +200,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/madeline_sprite" />
+                    app:srcCompat="@drawable/jonathan_sprite" />
             </FrameLayout>
 
         </LinearLayout>

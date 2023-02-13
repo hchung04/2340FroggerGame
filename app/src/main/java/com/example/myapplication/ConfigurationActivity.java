@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -147,11 +149,15 @@ public class ConfigurationActivity extends AppCompatActivity {
         toast.show();
     }
 
-    //Sends name here to GameActivity
+    // Sends name here to GameActivity
     private void switchToGameActivity(String name, String gameDifficulty) {
         Intent switchActivityIntent = new Intent(this, GameActivity.class);
         switchActivityIntent.putExtra("name_key", name);
         switchActivityIntent.putExtra("level_key", gameDifficulty);
+
+        // Convert Drawable chosenSprite to Bitmap in order to send to GameActivity
+        Bitmap sendSprite = (Bitmap) ((BitmapDrawable) chosenSprite).getBitmap();
+        switchActivityIntent.putExtra("player_key", sendSprite);
         startActivity(switchActivityIntent);
     }
 }
