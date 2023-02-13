@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -157,7 +156,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         switchActivityIntent.putExtra("level_key", gameDifficulty);
 
         // Convert Drawable chosenSprite to Bitmap in order to send to GameActivity
-        Bitmap sendSprite = (Bitmap)((BitmapDrawable) chosenSprite).getBitmap();
+        Bitmap sendSprite = (Bitmap) ((BitmapDrawable) chosenSprite).getBitmap();
         switchActivityIntent.putExtra("player_key", sendSprite);
         startActivity(switchActivityIntent);
     }
