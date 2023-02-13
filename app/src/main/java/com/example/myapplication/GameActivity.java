@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity {
     ImageView sprite;
 
     int points = 0;
-    int livesRemaining = 3;
+    int livesRemaining;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,7 @@ public class GameActivity extends AppCompatActivity {
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
 
-        pointsCounter.setText("POINTS:" + points);
-        livesCounter.setText("LIVES: " + livesRemaining);
+        pointsCounter.setText("Points:" + points);
 
         Intent retrieveConfigurationData = getIntent();
 
@@ -49,8 +48,18 @@ public class GameActivity extends AppCompatActivity {
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
         level.setText(levelInput);
 
+        if (levelInput.equals("Easy")) {
+            livesRemaining = 3;
+        } else if (levelInput.equals("Medium")) {
+            livesRemaining = 2;
+        } else {
+            livesRemaining = 1;
+        }
+        livesCounter.setText("Lives: " + livesRemaining);
+
         Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
         sprite.setImageBitmap(spriteInput);
+
     }
 
 
