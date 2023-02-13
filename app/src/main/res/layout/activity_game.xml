@@ -25,21 +25,21 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:text="GAME SCREEN"
+            android:text="@string/game_screen"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/pointCounter"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:text="POINTS:0"
+            android:text="@string/points"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/livesCounter"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="LIVES REMAINING: 3"
+            android:text="@string/lives_remaining"
             android:textSize="20sp" />
 
         <TextView
