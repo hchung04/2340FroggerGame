@@ -2,22 +2,25 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class GameActivity extends AppCompatActivity {
-    private TextView pointsCounter;
-    private TextView livesCounter;
+    TextView pointsCounter;
+    TextView livesCounter;
 
-    private TextView name;
-    private TextView level;
-    private ImageView sprite;
+    TextView name;
+    TextView level;
 
-    private int points = 0;
-    private int livesRemaining;
+    int points = 0;
+    int livesRemaining = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +31,9 @@ public class GameActivity extends AppCompatActivity {
         livesCounter = (TextView) findViewById(R.id.livesCounter);
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
-        sprite = (ImageView) findViewById(R.id.sprite);
 
-        pointsCounter.setText("Points:" + points);
+        pointsCounter.setText("POINTS:" + points);
+        livesCounter.setText("LIVES: " + livesRemaining);
 
         Intent retrieveConfigurationData = getIntent();
 
@@ -40,19 +43,6 @@ public class GameActivity extends AppCompatActivity {
 
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
         level.setText(levelInput);
-
-        if (levelInput.equals("Easy")) {
-            livesRemaining = 3;
-        } else if (levelInput.equals("Medium")) {
-            livesRemaining = 2;
-        } else {
-            livesRemaining = 1;
-        }
-        livesCounter.setText("Lives: " + livesRemaining);
-
-        Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
-        sprite.setImageBitmap(spriteInput);
-
     }
 
 

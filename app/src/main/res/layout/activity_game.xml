@@ -26,20 +26,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:text="@string/game_screen"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="32dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/pointCounter"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:text="@string/points"
-            android:textAlignment="center"
             android:textSize="20sp" />
 
         <TextView
@@ -47,7 +40,6 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/lives_remaining"
-            android:textAlignment="center"
             android:textSize="20sp" />
 
         <TextView
@@ -55,33 +47,13 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAlignment="center"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/level"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:textAlignment="center"
             android:textSize="20sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="31dp" />
-
-        <TextView
-            android:id="@+id/spriteLabel"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Here is your character!"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/sprite"
-            android:layout_width="299dp"
-            android:layout_height="209dp"
-            tools:srcCompat="@drawable/shirley_sprite" />
 
 
     </LinearLayout>
