@@ -14,8 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="121dp"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:orientation="vertical">
@@ -46,7 +46,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Game DIfficulty:"
+            android:text="Select Game Difficulty:"
             android:textSize="20sp" />
 
         <RadioGroup
@@ -60,11 +60,13 @@
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:text="Easy" />
+
             <RadioButton
                 android:id="@+id/medium"
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
                 android:text="Medium" />
+
             <RadioButton
                 android:id="@+id/hard"
                 android:layout_width="match_parent"
@@ -75,6 +77,140 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Your Player:"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/spriteOptions1"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/sprite1Bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#C7B8FF"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sprite1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/hera_sprite" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/sprite2Bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sprite2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/shirley_sprite" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/spriteOptions2"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/sprite3Bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sprite3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/madeline_sprite" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/sprite4Bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sprite4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/madeline_sprite" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/sprite5Bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sprite5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/madeline_sprite" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/submitButton"
