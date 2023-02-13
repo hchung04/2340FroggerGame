@@ -6,6 +6,26 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="submit">SUBMIT</string>
+
+    <!-- Strings used for display purposes in main activity -->
+    <string name="welcome">Welcome!</string>
+    <string name="start">Start</string>
+
+
+    <!-- Strings used for display purposes in activity_configuration -->
+    <string name="name_prompt">Enter your name:</string>
+    <string name="game_difficulty_prompt">Select Game Difficulty:</string>
+    <string name="player_prompt">Choose Your Player:</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+
+    <!-- Strings in activity_game -->
+    <string name="game_screen">GAME SCREEN</string>
+    <string name="points">POINTS: 0</string>
+    <string name="lives_remaining">LIVES REMAINING: 3</string>
+
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
