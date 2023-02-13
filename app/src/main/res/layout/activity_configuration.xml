@@ -180,7 +180,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/madeline_sprite" />
+                    app:srcCompat="@drawable/esther_sprite" />
             </FrameLayout>
 
             <FrameLayout
@@ -200,7 +200,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
-                    app:srcCompat="@drawable/madeline_sprite" />
+                    app:srcCompat="@drawable/jonathan_sprite" />
             </FrameLayout>
 
         </LinearLayout>
