@@ -2,29 +2,22 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class GameActivity extends AppCompatActivity {
-    TextView pointsCounter;
-    TextView livesCounter;
+    private TextView pointsCounter;
+    private TextView livesCounter;
 
-    TextView name;
-    TextView level;
-    ImageView sprite;
+    private TextView name;
+    private TextView level;
+    private ImageView sprite;
 
-    int points = 0;
-    int livesRemaining;
+    private int points = 0;
+    private int livesRemaining;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
