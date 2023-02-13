@@ -17,6 +17,7 @@ public class GameActivity extends AppCompatActivity {
     TextView livesCounter;
 
     TextView name;
+    TextView level;
 
     int points = 0;
     int livesRemaining = 3;
@@ -29,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
         livesCounter = (TextView) findViewById(R.id.livesCounter);
         name = findViewById(R.id.name);
+        level = findViewById(R.id.level);
 
         pointsCounter.setText("POINTS:" + points);
         livesCounter.setText("LIVES: " + livesRemaining);
@@ -38,6 +40,9 @@ public class GameActivity extends AppCompatActivity {
         String nameInput = retrieveConfigurationData.getStringExtra("name_key");
         // display the string into textView
         name.setText(nameInput);
+
+        String levelInput = retrieveConfigurationData.getStringExtra("level_key");
+        level.setText(levelInput);
     }
 
 

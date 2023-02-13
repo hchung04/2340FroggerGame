@@ -37,7 +37,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                                     .getText().toString();
                 }
                 if (isNameValid(name) && gameDifficulty != null) {
-                    switchToGameActivity(name);
+                    switchToGameActivity(name, gameDifficulty);
                 } else if (!isNameValid(name)) {
                     showInvalidNamePopup();
                 } else if (gameDifficulty == null) {
@@ -74,9 +74,10 @@ public class ConfigurationActivity extends AppCompatActivity {
     }
 
     //Sends name here to GameActivity
-    private void switchToGameActivity(String name) {
+    private void switchToGameActivity(String name, String gameDifficulty) {
         Intent switchActivityIntent = new Intent(this, GameActivity.class);
         switchActivityIntent.putExtra("name_key", name);
+        switchActivityIntent.putExtra("level_key", this.gameDifficulty);
         startActivity(switchActivityIntent);
     }
 }
