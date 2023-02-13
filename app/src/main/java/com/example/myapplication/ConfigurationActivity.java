@@ -99,9 +99,9 @@ public class ConfigurationActivity extends AppCompatActivity {
                                     .getText().toString();
                 }
 
-                if (checkNameValidity(name) && gameDifficulty != null && chosenSprite != null) {
+                if (isNameValid(name) && gameDifficulty != null && chosenSprite != null) {
                     switchToGameActivity();
-                } else if (!checkNameValidity(name)) {
+                } else if (!isNameValid(name)) {
                     showInvalidNamePopup();
                 } else if (gameDifficulty == null) {
                     showInvalidDifficulty();
@@ -113,7 +113,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     }
 
-    private boolean checkNameValidity(String name) {
+    private boolean isNameValid(String name) {
         return !(name.trim().equals(""));
     }
     private void showInvalidNamePopup() {
@@ -147,8 +147,11 @@ public class ConfigurationActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void switchToGameActivity() {
+    //Sends name here to GameActivity
+    private void switchToGameActivity(String name, String gameDifficulty) {
         Intent switchActivityIntent = new Intent(this, GameActivity.class);
+        switchActivityIntent.putExtra("name_key", name);
+        switchActivityIntent.putExtra("level_key", gameDifficulty);
         startActivity(switchActivityIntent);
     }
 }
