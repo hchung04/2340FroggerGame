@@ -100,7 +100,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                 }
 
                 if (isNameValid(name) && gameDifficulty != null && chosenSprite != null) {
-                    switchToGameActivity();
+                    switchToGameActivity(name, gameDifficulty);
                 } else if (!isNameValid(name)) {
                     showInvalidNamePopup();
                 } else if (gameDifficulty == null) {
