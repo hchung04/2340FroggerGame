@@ -2,9 +2,12 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ public class GameActivity extends AppCompatActivity {
 
     TextView name;
     TextView level;
+    ImageView sprite;
 
     int points = 0;
     int livesRemaining = 3;
@@ -31,6 +35,7 @@ public class GameActivity extends AppCompatActivity {
         livesCounter = (TextView) findViewById(R.id.livesCounter);
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
+        sprite = (ImageView) findViewById(R.id.sprite);
 
         pointsCounter.setText("POINTS:" + points);
         livesCounter.setText("LIVES: " + livesRemaining);
@@ -43,6 +48,9 @@ public class GameActivity extends AppCompatActivity {
 
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
         level.setText(levelInput);
+
+        Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
+        sprite.setImageBitmap(spriteInput);
     }
 
 

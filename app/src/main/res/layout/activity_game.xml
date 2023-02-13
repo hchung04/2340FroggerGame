@@ -55,6 +55,23 @@
             android:layout_height="match_parent"
             android:textSize="20sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="31dp" />
+
+        <TextView
+            android:id="@+id/spriteLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Here is your character!"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/sprite"
+            android:layout_width="155dp"
+            android:layout_height="209dp"
+            tools:srcCompat="@drawable/shirley_sprite" />
+
 
     </LinearLayout>
 
