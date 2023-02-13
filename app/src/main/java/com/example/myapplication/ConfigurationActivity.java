@@ -36,9 +36,9 @@ public class ConfigurationActivity extends AppCompatActivity {
                             ((RadioButton) findViewById(rg.getCheckedRadioButtonId()))
                                     .getText().toString();
                 }
-                if (checkNameValidity(name) && gameDifficulty != null) {
+                if (isNameValid(name) && gameDifficulty != null) {
                     switchToGameActivity(name);
-                } else if (!checkNameValidity(name)) {
+                } else if (!isNameValid(name)) {
                     showInvalidNamePopup();
                 } else if (gameDifficulty == null) {
                     showInvalidDifficulty();
@@ -52,7 +52,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     }
 
-    private boolean checkNameValidity(String name) {
+    private boolean isNameValid(String name) {
         return !(name.trim().equals(""));
     }
     private void showInvalidNamePopup() {
