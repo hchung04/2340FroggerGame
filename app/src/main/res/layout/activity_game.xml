@@ -42,6 +42,13 @@
             android:text="LIVES REMAINING: 3"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp" />
+
 
     </LinearLayout>
 

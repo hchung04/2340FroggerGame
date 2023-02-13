@@ -36,14 +36,17 @@ public class ConfigurationActivity extends AppCompatActivity {
                             ((RadioButton) findViewById(rg.getCheckedRadioButtonId()))
                                     .getText().toString();
                 }
-
                 if (checkNameValidity(name) && gameDifficulty != null) {
-                    switchToGameActivity();
+                    switchToGameActivity(name);
                 } else if (!checkNameValidity(name)) {
                     showInvalidNamePopup();
                 } else if (gameDifficulty == null) {
                     showInvalidDifficulty();
                 }
+
+
+
+
             }
         });
 
@@ -70,8 +73,10 @@ public class ConfigurationActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void switchToGameActivity() {
+    //Sends name here to GameActivity
+    private void switchToGameActivity(String name) {
         Intent switchActivityIntent = new Intent(this, GameActivity.class);
+        switchActivityIntent.putExtra("name_key", name);
         startActivity(switchActivityIntent);
     }
 }

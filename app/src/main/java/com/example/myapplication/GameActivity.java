@@ -3,15 +3,20 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class GameActivity extends AppCompatActivity {
     TextView pointsCounter;
     TextView livesCounter;
+
+    TextView name;
 
     int points = 0;
     int livesRemaining = 3;
@@ -23,12 +28,17 @@ public class GameActivity extends AppCompatActivity {
 
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
         livesCounter = (TextView) findViewById(R.id.livesCounter);
+        name = findViewById(R.id.name);
 
         pointsCounter.setText("POINTS:" + points);
         livesCounter.setText("LIVES: " + livesRemaining);
 
+        Intent retrieveConfigurationData = getIntent();
 
-
-
+        String nameInput = retrieveConfigurationData.getStringExtra("name_key");
+        // display the string into textView
+        name.setText(nameInput);
     }
+
+
 }
