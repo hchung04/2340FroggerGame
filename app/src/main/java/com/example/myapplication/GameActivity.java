@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +20,10 @@ public class GameActivity extends AppCompatActivity {
 
     private int points = 0;
     private int livesRemaining;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,21 @@ public class GameActivity extends AppCompatActivity {
 
         Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
         sprite.setImageBitmap(spriteInput);
+
+        int[] arr = new int[104];
+
+        for (int i = 0; i < 104; i++) {
+            arr[i] = R.drawable.grass__0;
+        }
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+        layoutManager = new GridLayoutManager(this, 13);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerViewAdapter = new RecyclerViewAdapter(arr);
+
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setHasFixedSize(true);
 
     }
 
