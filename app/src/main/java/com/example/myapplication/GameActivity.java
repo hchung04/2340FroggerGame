@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,10 @@ public class GameActivity extends AppCompatActivity {
     private int points = 0;
     private int livesRemaining;
 
+    private VelocityTracker mVelocityTracker = null;
+    private double xMove, yMove;
+
+    private static final int THRESHOLD = 70;  //arbitrary threshold to prevent negligible readings
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,19 +111,62 @@ public class GameActivity extends AppCompatActivity {
         String debugTag = "Debug";
         //amount to jump to next row
         int jump = (int) getResources().getDimension(R.dimen.tile_width);
+        float y = sprite.getTranslationY();
+        float x = sprite.getTranslationX();
+        int pointerId = event.getPointerId(event.getActionIndex());
 
         switch (action) {
         case (MotionEvent.ACTION_DOWN) :
             Log.d(debugTag, "Action was DOWN");
+            if(mVelocityTracker == null) {
+
+                mVelocityTracker = VelocityTracker.obtain();
+            }
+            else {
+                // Reset the velocity tracker back to its initial state.
+                mVelocityTracker.clear();
+            }
+            // Add a user's movement to the tracker.
+            mVelocityTracker.addMovement(event);
             return true;
         case (MotionEvent.ACTION_MOVE) :
+            mVelocityTracker.addMovement(event);
+            mVelocityTracker.computeCurrentVelocity(1000);
+            xMove = mVelocityTracker.getXVelocity(pointerId);
+            //Log.d("", "X velocity: " + xMove);
+            yMove =  mVelocityTracker.getYVelocity(pointerId);
+            //Log.d("", "Y velocity: " + yMove);
             Log.d(debugTag, "Action was MOVE");
             return true;
         case (MotionEvent.ACTION_UP) :
-            //jumps up one row
-            float y = sprite.getTranslationY();
-            sprite.setTranslationY(y - jump);
+            mVelocityTracker.addMovement(event);
+
+            //only moves down, left, right  if on the actual map, not the starting position
+            if(sprite.getTranslationY() < 0) {
+                if (xMove > THRESHOLD) {
+                    if (x + jump <= 411) {
+                        sprite.setTranslationX(x + jump);
+                    }
+                } else if (xMove < -THRESHOLD) {
+                    if (x - jump >= -411) {
+                        sprite.setTranslationX(x - jump);
+                    }
+                } else if (yMove < -THRESHOLD) {
+                    if (y + jump <= -137) {
+                        sprite.setTranslationY(y + jump);
+                    }
+                } else if (yMove > THRESHOLD) {
+                    if (y - jump >= -1507) {
+                        sprite.setTranslationY(y - jump);
+                    }
+                }
+            } else {
+                sprite.setTranslationY(y - jump);
+            }
+            yMove = 0;
+            xMove = 0;
             Log.d(debugTag, "Action was UP");
+            //Log.d(debugTag, event.getY()+"");
             return true;
         case (MotionEvent.ACTION_CANCEL) :
             Log.d(debugTag, "Action was CANCEL");
