@@ -1,19 +1,12 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MotionEventCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,10 +23,6 @@ public class GameActivity extends AppCompatActivity {
 
     private int points = 0;
     private int livesRemaining;
-
-//    private RecyclerView recyclerView;
-//    private RecyclerView.LayoutManager layoutManager;
-//    private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,33 +101,34 @@ public class GameActivity extends AppCompatActivity {
     //Touch controls are not complete - only jumps upwards each touch control
     //Need to differentiate between swiping and tapping
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction(); //differentiates the touch event
-        String DEBUG_TAG = "Debug";
-        int jump = (int) getResources().getDimension(R.dimen.tile_width); //amount to jump to next row
+        String debugTag = "Debug";
+        //amount to jump to next row
+        int jump = (int) getResources().getDimension(R.dimen.tile_width);
 
-        switch(action) {
-            case (MotionEvent.ACTION_DOWN) :
-                Log.d(DEBUG_TAG,"Action was DOWN");
-                return true;
-            case (MotionEvent.ACTION_MOVE) :
-                Log.d(DEBUG_TAG,"Action was MOVE");
-                return true;
-            case (MotionEvent.ACTION_UP) :
-                //jumps up one row
-                float y = sprite.getTranslationY();
-                sprite.setTranslationY(y - jump);
-                Log.d(DEBUG_TAG,"Action was UP");
-                return true;
-            case (MotionEvent.ACTION_CANCEL) :
-                Log.d(DEBUG_TAG,"Action was CANCEL");
-                return true;
-            case (MotionEvent.ACTION_OUTSIDE) :
-                Log.d(DEBUG_TAG,"Movement occurred outside bounds " +
-                        "of current screen element");
-                return true;
-            default :
-                return super.onTouchEvent(event);
+        switch (action) {
+        case (MotionEvent.ACTION_DOWN) :
+            Log.d(debugTag, "Action was DOWN");
+            return true;
+        case (MotionEvent.ACTION_MOVE) :
+            Log.d(debugTag, "Action was MOVE");
+            return true;
+        case (MotionEvent.ACTION_UP) :
+            //jumps up one row
+            float y = sprite.getTranslationY();
+            sprite.setTranslationY(y - jump);
+            Log.d(debugTag, "Action was UP");
+            return true;
+        case (MotionEvent.ACTION_CANCEL) :
+            Log.d(debugTag, "Action was CANCEL");
+            return true;
+        case (MotionEvent.ACTION_OUTSIDE) :
+            Log.d(debugTag, "Movement occurred outside bounds "
+                    + "of current screen element");
+            return true;
+        default :
+            return super.onTouchEvent(event);
         }
     }
 
