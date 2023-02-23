@@ -1,14 +1,24 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
     private TextView pointsCounter;
@@ -21,9 +31,9 @@ public class GameActivity extends AppCompatActivity {
     private int points = 0;
     private int livesRemaining;
 
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private RecyclerViewAdapter recyclerViewAdapter;
+//    private RecyclerView recyclerView;
+//    private RecyclerView.LayoutManager layoutManager;
+//    private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +46,12 @@ public class GameActivity extends AppCompatActivity {
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
 
-        pointsCounter.setText("Points:" + points);
+        //NOTE: need to change these so that we don't concatenate with setText
+        //Use getString and set format in strings.xml instead
+        pointsCounter.setText("Points: " + points);
+        //width and height of tiles and sprite
+        int width = (int) getResources().getDimension(R.dimen.tile_width);
+        int height = (int) getResources().getDimension(R.dimen.tile_height);
 
         Intent retrieveConfigurationData = getIntent();
 
@@ -54,26 +69,77 @@ public class GameActivity extends AppCompatActivity {
         } else {
             livesRemaining = 1;
         }
+
         livesCounter.setText("Lives: " + livesRemaining);
+
 
         Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
         sprite.setImageBitmap(spriteInput);
 
-        int[] arr = new int[104];
+        pointsCounter = (TextView) findViewById(R.id.pointCounter);
 
-        for (int i = 0; i < 104; i++) {
-            arr[i] = R.drawable.grass__0;
+        LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
+        ArrayList<LinearLayout> rows = new ArrayList<>();
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+
+        //Outer loop sets up individual rows
+        //Depending on row, changes tile type
+        //Total Rows: 11
+        for (int i = 0; i < 11; i++) {
+            LinearLayout row = new LinearLayout(this);
+            gridLayout.addView(row);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            rows.add(row);
+            int tileType;
+
+            if (i % 2 == 0) {
+                tileType = R.drawable.grass__0;
+            } else {
+                tileType = R.drawable.water;
+            }
+
+            //Sets number of tiles per row
+            //Total tiles per row: 8
+            for (int j = 0; j < 8; j++) {
+                ImageView tile = new ImageView(this);
+                tile.setImageResource(tileType);
+                row.addView(tile);
+                tile.setLayoutParams(params);
+            }
         }
+    }
 
+    //Touch controls are not complete - only jumps upwards each touch control
+    //Need to differentiate between swiping and tapping
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        int action = event.getAction(); //differentiates the touch event
+        String DEBUG_TAG = "Debug";
+        int jump = (int) getResources().getDimension(R.dimen.tile_width); //amount to jump to next row
 
-        recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new GridLayoutManager(this, 13);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapter = new RecyclerViewAdapter(arr);
-
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setHasFixedSize(true);
-
+        switch(action) {
+            case (MotionEvent.ACTION_DOWN) :
+                Log.d(DEBUG_TAG,"Action was DOWN");
+                return true;
+            case (MotionEvent.ACTION_MOVE) :
+                Log.d(DEBUG_TAG,"Action was MOVE");
+                return true;
+            case (MotionEvent.ACTION_UP) :
+                //jumps up one row
+                float y = sprite.getTranslationY();
+                sprite.setTranslationY(y - jump);
+                Log.d(DEBUG_TAG,"Action was UP");
+                return true;
+            case (MotionEvent.ACTION_CANCEL) :
+                Log.d(DEBUG_TAG,"Action was CANCEL");
+                return true;
+            case (MotionEvent.ACTION_OUTSIDE) :
+                Log.d(DEBUG_TAG,"Movement occurred outside bounds " +
+                        "of current screen element");
+                return true;
+            default :
+                return super.onTouchEvent(event);
+        }
     }
 
 

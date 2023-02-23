@@ -23,8 +23,8 @@
 
     <!-- Strings in activity_game -->
     <string name="game_screen">GAME SCREEN</string>
-    <string name="points">POINTS: 0</string>
-    <string name="lives_remaining">LIVES REMAINING: 3</string>
+    <string name="points">POINTS: </string>
+    <string name="lives_remaining">LIVES: </string>
 
 
     <string name="hello_first_fragment">Hello first fragment</string>
