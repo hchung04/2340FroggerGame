@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -79,7 +81,7 @@ public class GameActivity extends AppCompatActivity {
         //Outer loop sets up individual rows
         //Depending on row, changes tile type
         //Total Rows: 11
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 10; i++) {
             LinearLayout row = new LinearLayout(this);
             gridLayout.addView(row);
             row.setOrientation(LinearLayout.HORIZONTAL);
@@ -91,11 +93,11 @@ public class GameActivity extends AppCompatActivity {
             //Total tiles per row: 8
             for (int j = 0; j < 8; j++) {
                 if (i % 2 == 0) {
-                    tileType = R.drawable.grass__0;
+                    tileType = R.drawable.water;
                 } else if (i == 0) {
                     tileType = R.drawable.tileset_brick_wall;
                 } else {
-                    tileType = R.drawable.water;
+                    tileType = R.drawable.grass__0;
                 }
                 if (j % 2 == 0 && i == 0) {
                     tileType = R.drawable.tileset_brick_wall;
@@ -107,7 +109,55 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }
+
+        int jump = (int) getResources().getDimension(R.dimen.tile_width);
+
+        ImageView upButton = (ImageView) findViewById(R.id.upButton);
+        upButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float y = sprite.getTranslationY();
+
+                if (y - jump >= -10 * jump || y == 0) {
+                    sprite.setTranslationY(y - jump);
+                }
+            }
+        });
+
+        ImageView downButton = (ImageView) findViewById(R.id.downButton);
+        downButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float y = sprite.getTranslationY();
+
+                if (y + jump <= -jump) {
+                    sprite.setTranslationY(y + jump);
+                }
+            }
+        });
+
+        ImageView leftButton = (ImageView) findViewById(R.id.leftButton);
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float x = sprite.getTranslationX();
+
+                if (x - jump >= -411) {
+                    sprite.setTranslationX(x - jump);
+                }
+            }
+        });
+
+        ImageView rightButton = (ImageView) findViewById(R.id.rightButton);
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float x = sprite.getTranslationX();
+
+                if (x + jump <= 411) {
+                    sprite.setTranslationX(x + jump);
+                }
+            }
+        });
     }
+
+    /*
 
     //Touch controls are not complete - only jumps upwards each touch control
     //Need to differentiate between swiping and tapping
@@ -161,8 +211,7 @@ public class GameActivity extends AppCompatActivity {
                     if (y + jump <= -jump) {
                         sprite.setTranslationY(y + jump);
                     }
-                } else {
-                    // else if (yMove > THRESHOLD) {
+                } else if (yMove > THRESHOLD || (xMove == 0 && yMove == 0)) {
                     if (y - jump >= -11 * jump) {
                         sprite.setTranslationY(y - jump);
                     }
@@ -186,6 +235,8 @@ public class GameActivity extends AppCompatActivity {
             return super.onTouchEvent(event);
         }
     }
+
+    */
 
 
 }
