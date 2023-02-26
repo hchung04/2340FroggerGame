@@ -86,19 +86,25 @@ public class GameActivity extends AppCompatActivity {
             rows.add(row);
             int tileType;
 
-            if (i % 2 == 0) {
-                tileType = R.drawable.grass__0;
-            } else {
-                tileType = R.drawable.water;
-            }
 
             //Sets number of tiles per row
             //Total tiles per row: 8
             for (int j = 0; j < 8; j++) {
+                if (i % 2 == 0) {
+                    tileType = R.drawable.grass__0;
+                } else if (i == 0) {
+                    tileType = R.drawable.tileset_brick_wall;
+                } else {
+                    tileType = R.drawable.water;
+                }
+                if (j % 2 == 0 && i == 0) {
+                    tileType = R.drawable.tileset_brick_wall;
+                }
                 ImageView tile = new ImageView(this);
                 tile.setImageResource(tileType);
                 row.addView(tile);
                 tile.setLayoutParams(params);
+
             }
         }
     }
