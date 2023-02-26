@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     private VelocityTracker mVelocityTracker = null;
     private double xMove, yMove;
 
-    private static final int THRESHOLD = 70;  //arbitrary threshold to prevent negligible readings
+    private static final int THRESHOLD = 1800; //arbitrary threshold to prevent negligible readings
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,11 +158,12 @@ public class GameActivity extends AppCompatActivity {
                         sprite.setTranslationX(x - jump);
                     }
                 } else if (yMove < -THRESHOLD) {
-                    if (y + jump <= -137) {
+                    if (y + jump <= -jump) {
                         sprite.setTranslationY(y + jump);
                     }
-                } else if (yMove > THRESHOLD) {
-                    if (y - jump >= -1507) {
+                } else {
+                    // else if (yMove > THRESHOLD) {
+                    if (y - jump >= -11 * jump) {
                         sprite.setTranslationY(y - jump);
                     }
                 }
