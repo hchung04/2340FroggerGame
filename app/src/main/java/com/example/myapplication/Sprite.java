@@ -29,4 +29,24 @@ public class Sprite{
         return initXCoord;
     }
 
+    public int setLives(String level) {
+        if (level.equals("Easy")) {
+            return 3;
+        } else if (level.equals("Medium")) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    public int setStartingPoints(String level) {
+        if (level.equals("Easy")) {
+            return 2;
+        } else if (level.equals("Medium")) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 }
