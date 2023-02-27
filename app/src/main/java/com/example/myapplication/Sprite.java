@@ -7,25 +7,12 @@ public class Sprite{
         }
         return initYCoord;
     }
-
-    public int setLives(String level) {
-        if (level.equals("Easy")) {
-            return 3;
-        } else if (level.equals("Medium")) {
-            return 2;
-        } else {
-            return 1;
+  
+    public static float moveDown(float initYCoord, float jump){
+        if (initYCoord + jump <= -jump) {
+            return initYCoord + jump;
         }
-    }
-
-    public int setStartingPoints(String level) {
-        if (level.equals("Easy")) {
-            return 2;
-        } else if (level.equals("Medium")) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return initYCoord;
     }
 
 }

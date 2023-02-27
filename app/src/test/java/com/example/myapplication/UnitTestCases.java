@@ -38,6 +38,19 @@ public class UnitTestCases {
         assert(player.setStartingPoints("Hard") == 0);
     }
 
+    @Test
+    public void movesDown(){
+        float y = -637;
+        assert(Sprite.moveDown(y, JUMP) - y == 50);
+    }
+
+    @Test
+    public void movesDownOutOfBounds() {
+        float y = -JUMP;
+        assert (Sprite.moveDown(y, JUMP) == y);
+
+    }
+
 
 
 
