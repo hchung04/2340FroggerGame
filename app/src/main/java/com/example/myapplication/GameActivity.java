@@ -58,21 +58,16 @@ public class GameActivity extends AppCompatActivity {
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
         level.setText(levelInput);
 
-        if (levelInput.equals("Easy")) {
-            livesRemaining = 3;
-        } else if (levelInput.equals("Medium")) {
-            livesRemaining = 2;
-        } else {
-            livesRemaining = 1;
-        }
-
+        int livesRemaining = setLives(levelInput);
         livesCounter.setText("Lives: " + livesRemaining);
 
 
         Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
         sprite.setImageBitmap(spriteInput);
 
+        int startingPoints = setPoints(levelInput);
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
+        pointsCounter.setText("Points: " + startingPoints);
 
         LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
         ArrayList<LinearLayout> rows = new ArrayList<>();
@@ -155,6 +150,26 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public int setLives(String level) {
+        if (level.equals("Easy")) {
+            return 3;
+        } else if (level.equals("Medium")) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    public int setPoints(String level) {
+        if (level.equals("Easy")) {
+            return 2;
+        } else if (level.equals("Medium")) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /*
