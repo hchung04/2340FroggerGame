@@ -36,6 +36,19 @@ public class UnitTestCases{
 
     }
 
+    @Test
+    public void movesRight(){
+        float x = -411;
+        assert(Sprite.moveRight(x, JUMP) - x == 50);
+    }
+
+    @Test
+    public void movesRightOutOfBounds() {
+        float x = 411;
+        assert(Sprite.moveRight(x, JUMP)  == x);
+
+    }
+
 
 }
 

@@ -15,4 +15,11 @@ public class Sprite{
         return initYCoord;
     }
 
+    public static float moveRight(float initXCoord, float jump){
+        if (initXCoord + jump <= 411) {
+            return initXCoord + jump;
+        }
+        return initXCoord;
+    }
+
 }
