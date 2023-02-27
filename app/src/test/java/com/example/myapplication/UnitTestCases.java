@@ -70,15 +70,11 @@ public class UnitTestCases {
         assert(Sprite.moveLeft(x, JUMP) - x == -50);
     }
 
+    @Test
     public void movesLeftOutOfBounds() {
         float x = -411;
         assert (Sprite.moveLeft(x, JUMP) == x);
     }
-
-
-
-
-
 
 }
 
