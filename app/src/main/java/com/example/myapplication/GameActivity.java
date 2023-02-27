@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +25,8 @@ public class GameActivity extends AppCompatActivity {
     private int livesRemaining;
 
     private VelocityTracker mVelocityTracker = null;
-    private double xMove, yMove;
+    private double xMove;
+    private double yMove;
 
     private static final int THRESHOLD = 1800; //arbitrary threshold to prevent negligible readings
     @Override

@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 public class Grass {
 
-    ImageView view;
+    private ImageView view;
 
     public Grass(ImageView view) {
         this.view = view;
