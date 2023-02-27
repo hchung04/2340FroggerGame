@@ -15,24 +15,18 @@ public class Sprite{
         return initYCoord;
     }
 
-    public int setLives(String level) {
-        if (level.equals("Easy")) {
-            return 3;
-        } else if (level.equals("Medium")) {
-            return 2;
-        } else {
-            return 1;
+    public static float moveRight(float initXCoord, float jump){
+        if (initXCoord + jump <= 411) {
+            return initXCoord + jump;
         }
+        return initXCoord;
     }
 
-    public int setStartingPoints(String level) {
-        if (level.equals("Easy")) {
-            return 2;
-        } else if (level.equals("Medium")) {
-            return 1;
-        } else {
-            return 0;
+    public static float moveLeft(float initXCoord, float jump){
+        if (initXCoord - jump >= -411) {
+            return initXCoord - jump;
         }
+        return initXCoord;
     }
 
 }
