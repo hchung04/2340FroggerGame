@@ -7,7 +7,7 @@ import org.junit.Test;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class UnitTestCases{
+public class UnitTestCases {
     private final float JUMP = 50;
 
     @Test
@@ -20,7 +20,22 @@ public class UnitTestCases{
     public void movesUpOutOfBounds() {
         float y = -10 * JUMP;
         assert(Sprite.moveUp(y, JUMP)  == y);
+    }
 
+    @Test
+    public void checkLives() {
+        Sprite player = new Sprite();
+        assert(player.setLives("Easy") == 3);
+        assert(player.setLives("Medium") == 2);
+        assert(player.setLives("Hard") == 1);
+    }
+
+    @Test
+    public void checkStartingPoints() {
+        Sprite player = new Sprite();
+        assert(player.setStartingPoints("Easy") == 2);
+        assert(player.setStartingPoints("Medium") == 1);
+        assert(player.setStartingPoints("Hard") == 0);
     }
 
     @Test
@@ -48,6 +63,10 @@ public class UnitTestCases{
         assert(Sprite.moveRight(x, JUMP)  == x);
 
     }
+
+
+
+
 
 
 }
