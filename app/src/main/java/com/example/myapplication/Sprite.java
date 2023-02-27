@@ -25,7 +25,7 @@ public class Sprite{
         }
     }
 
-    public int setPoints(String level) {
+    public int setStartingPoints(String level) {
         if (level.equals("Easy")) {
             return 2;
         } else if (level.equals("Medium")) {
