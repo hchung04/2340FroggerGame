@@ -8,4 +8,11 @@ public class Sprite{
         return initYCoord;
     }
 
+    public static float moveDown(float initYCoord, float jump){
+        if (initYCoord + jump <= -jump) {
+            return initYCoord + jump;
+        }
+        return initYCoord;
+    }
+
 }
