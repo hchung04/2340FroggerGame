@@ -99,6 +99,10 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     tileType = R.drawable.grass__0;
                 }
+                if (i == 5) {
+                    tileType = R.drawable.road_tile;
+                }
+
                 if (j % 2 == 0 && i == 0) {
                     tileType = R.drawable.tileset_brick_wall;
                 }
