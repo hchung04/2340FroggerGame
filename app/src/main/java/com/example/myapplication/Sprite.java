@@ -22,4 +22,11 @@ public class Sprite{
         return initXCoord;
     }
 
+    public static float moveLeft(float initXCoord, float jump){
+        if (initXCoord - jump >= -411) {
+            return initXCoord - jump;
+        }
+        return initXCoord;
+    }
+
 }
