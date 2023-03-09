@@ -102,6 +102,9 @@ public class GameActivity extends AppCompatActivity {
                 if (i == 5) {
                     tileType = R.drawable.road_tile;
                 }
+                if (i == 3) {
+                    tileType = R.drawable.water;
+
 
                 if (j % 2 == 0 && i == 0) {
                     tileType = R.drawable.tileset_brick_wall;
