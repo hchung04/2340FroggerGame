@@ -65,19 +65,10 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-        Score score = new Score();
-=======
-        carRight1 = (ImageView) findViewById(R.id.redCar);
-        //carRight2 = (ImageView) findViewById(R.id.redCar2);
->>>>>>> Shirley
-=======
 
         Score score = new Score();
         carRight1 = (ImageView) findViewById(R.id.redCar);
         //carRight2 = (ImageView) findViewById(R.id.redCar2);
->>>>>>> Stashed changes
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
@@ -131,7 +122,6 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     tileType = R.drawable.grass__0;
                 }
-<<<<<<< HEAD
                 if (i == 5) {
                     tileType = R.drawable.road_tile;
                 }
@@ -140,12 +130,8 @@ public class GameActivity extends AppCompatActivity {
                 }
                 if (i == 3) {
                     tileType = R.drawable.water;
-=======
-                if (j % 2 == 0 && i == 0) {
-                    tileType = R.drawable.tileset_brick_wall;
->>>>>>> Shirley
-                }
 
+                }
                     if (j % 2 == 0 && i == 0) {
                         tileType = R.drawable.tileset_brick_wall;
                     }
@@ -201,17 +187,8 @@ public class GameActivity extends AppCompatActivity {
                         sprite.setTranslationX(x + jump);
                     }
                 }
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-            });
-        }
-=======
-            }
         });
-=======
 
-            });
->>>>>>> Stashed changes
 
 
         //Move to out of screen
@@ -247,10 +224,6 @@ public class GameActivity extends AppCompatActivity {
         }, 0, 100);
 
     }
-<<<<<<< Updated upstream
->>>>>>> Shirley
-=======
->>>>>>> Stashed changes
 
 
     public int setLives(String level) {
@@ -273,7 +246,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-<<<<<<< HEAD
     /*
 
     //Touch controls are not complete - only jumps upwards each touch control
@@ -356,10 +328,3 @@ public class GameActivity extends AppCompatActivity {
     */
 
     }
-<<<<<<< Updated upstream
-=======
-
-}
->>>>>>> Shirley
-=======
->>>>>>> Stashed changes
