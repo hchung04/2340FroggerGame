@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +25,8 @@ public class GameActivity extends AppCompatActivity {
     private int livesRemaining;
 
     private VelocityTracker mVelocityTracker = null;
-    private double xMove, yMove;
+    private double xMove;
+    private double yMove;
 
     private static final int THRESHOLD = 1800; //arbitrary threshold to prevent negligible readings
     @Override
@@ -41,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
+        Score score = new Score();
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
@@ -58,21 +57,16 @@ public class GameActivity extends AppCompatActivity {
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
         level.setText(levelInput);
 
-        if (levelInput.equals("Easy")) {
-            livesRemaining = 3;
-        } else if (levelInput.equals("Medium")) {
-            livesRemaining = 2;
-        } else {
-            livesRemaining = 1;
-        }
-
+        int livesRemaining = setLives(levelInput);
         livesCounter.setText("Lives: " + livesRemaining);
 
 
         Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
         sprite.setImageBitmap(spriteInput);
 
+        int startingPoints = setPoints(levelInput);
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
+        pointsCounter.setText("Points: " + score.getScore());
 
         LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
         ArrayList<LinearLayout> rows = new ArrayList<>();
@@ -127,9 +121,9 @@ public class GameActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     float y = sprite.getTranslationY();
 
-                    if (y - jump >= -10 * jump || y == 0) {
-                        sprite.setTranslationY(y - jump);
-                    }
+                if (y - jump >= -10 * jump || y == 0) {
+                    sprite.setTranslationY(y - jump);
+                    pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));;
                 }
             });
 
@@ -166,6 +160,26 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
         }
+
+    public int setLives(String level) {
+        if (level.equals("Easy")) {
+            return 3;
+        } else if (level.equals("Medium")) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    public int setPoints(String level) {
+        if (level.equals("Easy")) {
+            return 2;
+        } else if (level.equals("Medium")) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
     /*
 
