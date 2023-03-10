@@ -39,7 +39,6 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
-        Score score = new Score();
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
@@ -66,7 +65,7 @@ public class GameActivity extends AppCompatActivity {
 
         int startingPoints = setPoints(levelInput);
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
-        pointsCounter.setText("Points: " + score.getScore());
+        pointsCounter.setText("Points: " + startingPoints);
 
         LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
         ArrayList<LinearLayout> rows = new ArrayList<>();
@@ -123,7 +122,6 @@ public class GameActivity extends AppCompatActivity {
 
                 if (y - jump >= -10 * jump || y == 0) {
                     sprite.setTranslationY(y - jump);
-                    pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));;
                 }
             });
 
