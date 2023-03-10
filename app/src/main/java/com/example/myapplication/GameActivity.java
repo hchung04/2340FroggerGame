@@ -9,6 +9,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Display;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -32,13 +33,7 @@ public class GameActivity extends AppCompatActivity {
     private ImageView carRight1;
     //private ImageView carRight2;
 
-
-    private int points = 0;
     private int livesRemaining;
-
-    private VelocityTracker mVelocityTracker = null;
-    private double xMove;
-    private double yMove;
 
     //screen size
     private int screenWidth;
@@ -52,9 +47,6 @@ public class GameActivity extends AppCompatActivity {
     private Handler handler = new Handler(Looper.myLooper());
     private Timer timer = new Timer();
 
-
-
-    private static final int THRESHOLD = 1800; //arbitrary threshold to prevent negligible readings
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,86 +237,5 @@ public class GameActivity extends AppCompatActivity {
             return 0;
         }
     }
-
-    /*
-
-    //Touch controls are not complete - only jumps upwards each touch control
-    //Need to differentiate between swiping and tapping
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int action = event.getAction(); //differentiates the touch event
-        String debugTag = "Debug";
-        //amount to jump to next row
-        int jump = (int) getResources().getDimension(R.dimen.tile_width);
-        float y = sprite.getTranslationY();
-        float x = sprite.getTranslationX();
-        int pointerId = event.getPointerId(event.getActionIndex());
-
-        switch (action) {
-        case (MotionEvent.ACTION_DOWN) :
-            Log.d(debugTag, "Action was DOWN");
-            if(mVelocityTracker == null) {
-
-                mVelocityTracker = VelocityTracker.obtain();
-            }
-            else {
-                // Reset the velocity tracker back to its initial state.
-                mVelocityTracker.clear();
-            }
-            // Add a user's movement to the tracker.
-            mVelocityTracker.addMovement(event);
-            return true;
-        case (MotionEvent.ACTION_MOVE) :
-            mVelocityTracker.addMovement(event);
-            mVelocityTracker.computeCurrentVelocity(1000);
-            xMove = mVelocityTracker.getXVelocity(pointerId);
-            //Log.d("", "X velocity: " + xMove);
-            yMove =  mVelocityTracker.getYVelocity(pointerId);
-            //Log.d("", "Y velocity: " + yMove);
-            Log.d(debugTag, "Action was MOVE");
-            return true;
-        case (MotionEvent.ACTION_UP) :
-            mVelocityTracker.addMovement(event);
-
-            //only moves down, left, right  if on the actual map, not the starting position
-            if(sprite.getTranslationY() < 0) {
-                if (xMove > THRESHOLD) {
-                    if (x + jump <= 411) {
-                        sprite.setTranslationX(x + jump);
-                    }
-                } else if (xMove < -THRESHOLD) {
-                    if (x - jump >= -411) {
-                        sprite.setTranslationX(x - jump);
-                    }
-                } else if (yMove < -THRESHOLD) {
-                    if (y + jump <= -jump) {
-                        sprite.setTranslationY(y + jump);
-                    }
-                } else if (yMove > THRESHOLD || (xMove == 0 && yMove == 0)) {
-                    if (y - jump >= -11 * jump) {
-                        sprite.setTranslationY(y - jump);
-                    }
-                }
-            } else {
-                sprite.setTranslationY(y - jump);
-            }
-            yMove = 0;
-            xMove = 0;
-            Log.d(debugTag, "Action was UP");
-            //Log.d(debugTag, event.getY()+"");
-            return true;
-        case (MotionEvent.ACTION_CANCEL) :
-            Log.d(debugTag, "Action was CANCEL");
-            return true;
-        case (MotionEvent.ACTION_OUTSIDE) :
-            Log.d(debugTag, "Movement occurred outside bounds "
-                    + "of current screen element");
-            return true;
-        default :
-            return super.onTouchEvent(event);
-        }
-    }
-
-    */
 
     }
