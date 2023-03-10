@@ -65,12 +65,19 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         Score score = new Score();
 =======
         carRight1 = (ImageView) findViewById(R.id.redCar);
         //carRight2 = (ImageView) findViewById(R.id.redCar2);
 >>>>>>> Shirley
+=======
+
+        Score score = new Score();
+        carRight1 = (ImageView) findViewById(R.id.redCar);
+        //carRight2 = (ImageView) findViewById(R.id.redCar2);
+>>>>>>> Stashed changes
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
@@ -194,12 +201,17 @@ public class GameActivity extends AppCompatActivity {
                         sprite.setTranslationX(x + jump);
                     }
                 }
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             });
         }
 =======
             }
         });
+=======
+
+            });
+>>>>>>> Stashed changes
 
 
         //Move to out of screen
@@ -235,7 +247,10 @@ public class GameActivity extends AppCompatActivity {
         }, 0, 100);
 
     }
+<<<<<<< Updated upstream
 >>>>>>> Shirley
+=======
+>>>>>>> Stashed changes
 
 
     public int setLives(String level) {
@@ -341,7 +356,10 @@ public class GameActivity extends AppCompatActivity {
     */
 
     }
+<<<<<<< Updated upstream
 =======
 
 }
 >>>>>>> Shirley
+=======
+>>>>>>> Stashed changes
