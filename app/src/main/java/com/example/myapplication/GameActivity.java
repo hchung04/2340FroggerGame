@@ -4,14 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.Display;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameActivity extends AppCompatActivity {
     private TextView pointsCounter;
@@ -21,12 +29,30 @@ public class GameActivity extends AppCompatActivity {
     private TextView level;
     private ImageView sprite;
 
+    private ImageView carRight1;
+    //private ImageView carRight2;
+
+
     private int points = 0;
     private int livesRemaining;
 
     private VelocityTracker mVelocityTracker = null;
     private double xMove;
     private double yMove;
+
+    //screen size
+    private int screenWidth;
+    private int screenHeight;
+
+    //position
+    private float carRightX1;
+    //private float carRightX2;
+
+    //Initialize Class
+    private Handler handler = new Handler(Looper.myLooper());
+    private Timer timer = new Timer();
+
+
 
     private static final int THRESHOLD = 1800; //arbitrary threshold to prevent negligible readings
     @Override
@@ -39,6 +65,8 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
+        carRight1 = (ImageView) findViewById(R.id.redCar);
+        //carRight2 = (ImageView) findViewById(R.id.redCar2);
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
@@ -87,15 +115,11 @@ public class GameActivity extends AppCompatActivity {
             for (int j = 0; j < 8; j++) {
                 if (i % 2 == 0) {
                     tileType = R.drawable.water;
-                } else if (i == 0) {
-                    tileType = R.drawable.tileset_brick_wall;
+                } else if (i == 5) {
+                    tileType = R.drawable.road_tile;
                 } else {
                     tileType = R.drawable.grass__0;
                 }
-                if (i == 5) {
-                    tileType = R.drawable.road_tile;
-                }
-
                 if (j % 2 == 0 && i == 0) {
                     tileType = R.drawable.tileset_brick_wall;
                 }
@@ -152,7 +176,42 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        //Move to out of screen
+        carRight1.setTranslationX(-600);
+        carRight1.setTranslationY(-300);
+
+        //carRight2.setTranslationX(-500);
+        //carRight2.setTranslationY(-300);
+
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        carRightX1 = carRight1.getX() + 20;
+                        //carRightX2 = carRight2.getX() + 20;
+                        if (carRight1.getTranslationX() > 600) {
+                            carRight1.setTranslationX(-600);
+                        } else {
+                            carRight1.setX(carRightX1);
+                        }
+                        /*if (carRight2.getTranslationX() > 600) {
+                            carRight2.setTranslationX(-600);
+                        } else {
+                            carRight2.setX(carRightX2);
+                        }*/
+
+                    }
+                });
+            }
+        }, 0, 100);
+
     }
+
 
     public int setLives(String level) {
         if (level.equals("Easy")) {
@@ -173,87 +232,6 @@ public class GameActivity extends AppCompatActivity {
             return 0;
         }
     }
-
-    /*
-
-    //Touch controls are not complete - only jumps upwards each touch control
-    //Need to differentiate between swiping and tapping
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int action = event.getAction(); //differentiates the touch event
-        String debugTag = "Debug";
-        //amount to jump to next row
-        int jump = (int) getResources().getDimension(R.dimen.tile_width);
-        float y = sprite.getTranslationY();
-        float x = sprite.getTranslationX();
-        int pointerId = event.getPointerId(event.getActionIndex());
-
-        switch (action) {
-        case (MotionEvent.ACTION_DOWN) :
-            Log.d(debugTag, "Action was DOWN");
-            if(mVelocityTracker == null) {
-
-                mVelocityTracker = VelocityTracker.obtain();
-            }
-            else {
-                // Reset the velocity tracker back to its initial state.
-                mVelocityTracker.clear();
-            }
-            // Add a user's movement to the tracker.
-            mVelocityTracker.addMovement(event);
-            return true;
-        case (MotionEvent.ACTION_MOVE) :
-            mVelocityTracker.addMovement(event);
-            mVelocityTracker.computeCurrentVelocity(1000);
-            xMove = mVelocityTracker.getXVelocity(pointerId);
-            //Log.d("", "X velocity: " + xMove);
-            yMove =  mVelocityTracker.getYVelocity(pointerId);
-            //Log.d("", "Y velocity: " + yMove);
-            Log.d(debugTag, "Action was MOVE");
-            return true;
-        case (MotionEvent.ACTION_UP) :
-            mVelocityTracker.addMovement(event);
-
-            //only moves down, left, right  if on the actual map, not the starting position
-            if(sprite.getTranslationY() < 0) {
-                if (xMove > THRESHOLD) {
-                    if (x + jump <= 411) {
-                        sprite.setTranslationX(x + jump);
-                    }
-                } else if (xMove < -THRESHOLD) {
-                    if (x - jump >= -411) {
-                        sprite.setTranslationX(x - jump);
-                    }
-                } else if (yMove < -THRESHOLD) {
-                    if (y + jump <= -jump) {
-                        sprite.setTranslationY(y + jump);
-                    }
-                } else if (yMove > THRESHOLD || (xMove == 0 && yMove == 0)) {
-                    if (y - jump >= -11 * jump) {
-                        sprite.setTranslationY(y - jump);
-                    }
-                }
-            } else {
-                sprite.setTranslationY(y - jump);
-            }
-            yMove = 0;
-            xMove = 0;
-            Log.d(debugTag, "Action was UP");
-            //Log.d(debugTag, event.getY()+"");
-            return true;
-        case (MotionEvent.ACTION_CANCEL) :
-            Log.d(debugTag, "Action was CANCEL");
-            return true;
-        case (MotionEvent.ACTION_OUTSIDE) :
-            Log.d(debugTag, "Movement occurred outside bounds "
-                    + "of current screen element");
-            return true;
-        default :
-            return super.onTouchEvent(event);
-        }
-    }
-
-    */
 
 
 }
