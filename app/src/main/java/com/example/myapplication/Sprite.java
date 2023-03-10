@@ -48,5 +48,4 @@ public class Sprite {
             return 0;
         }
     }
-
 }
