@@ -104,7 +104,7 @@ public class GameActivity extends AppCompatActivity {
 
         int startingPoints = setPoints(levelInput);
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
-        pointsCounter.setText("Points: " + score.getScore());
+        pointsCounter.setText("Points: " + startingPoints);
 
         LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
         ArrayList<LinearLayout> rows = new ArrayList<>();
