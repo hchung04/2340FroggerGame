@@ -39,10 +39,11 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         sprite = (ImageView) findViewById(R.id.sprite);
+        Score score = new Score();
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
-        pointsCounter.setText("Points: " + points);
+        pointsCounter.setText("Points: " + score.getScore());
         //width and height of tiles and sprite
         int width = (int) getResources().getDimension(R.dimen.tile_width);
         int height = (int) getResources().getDimension(R.dimen.tile_height);
@@ -122,8 +123,9 @@ public class GameActivity extends AppCompatActivity {
 
                 if (y - jump >= -10 * jump || y == 0) {
                     sprite.setTranslationY(y - jump);
+                    pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
                 }
-            });
+            }});
 
             ImageView downButton = (ImageView) findViewById(R.id.downButton);
             downButton.setOnClickListener(new View.OnClickListener() {
