@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -28,23 +29,25 @@ public class GameActivity extends AppCompatActivity {
     private TextView level;
     private ImageView sprite;
 
-    private ImageView carRight1;
+    private ImageView carRight;
     //private ImageView carRight2;
+
+    private ImageView carLeft;
+    private ImageView truckLeft;
 
     private int livesRemaining;
 
-    //screen size
-    private int screenWidth;
-    private int screenHeight;
-
     //position
-    private float carRightX1;
+    private float carRightX;
     //private float carRightX2;
+    private float carLeftX;
+    private float truckLeftX;
 
     //Initialize Class
     private Handler handler = new Handler(Looper.myLooper());
     private Timer timer = new Timer();
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +60,10 @@ public class GameActivity extends AppCompatActivity {
         sprite = (ImageView) findViewById(R.id.sprite);
 
         Score score = new Score();
-        carRight1 = (ImageView) findViewById(R.id.redCar);
+        carRight = (ImageView) findViewById(R.id.redCar);
         //carRight2 = (ImageView) findViewById(R.id.redCar2);
+        carLeft = (ImageView) findViewById(R.id.brownCar);
+        truckLeft = (ImageView) findViewById(R.id.orangeTruck);
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
@@ -182,8 +187,14 @@ public class GameActivity extends AppCompatActivity {
 
 
         //Move to out of screen
-        carRight1.setTranslationX(-600);
-        carRight1.setTranslationY(-300);
+        carRight.setTranslationX(-600);
+        carRight.setTranslationY(-270);
+
+        carLeft.setTranslationX(-600);
+        carLeft.setTranslationY(-550);
+
+        truckLeft.setTranslationX(-600);
+        truckLeft.setTranslationY(-400);
 
         //carRight2.setTranslationX(-500);
         //carRight2.setTranslationY(-300);
@@ -195,12 +206,26 @@ public class GameActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        carRightX1 = carRight1.getX() + 20;
+                        carRightX = carRight.getX() + 20;
                         //carRightX2 = carRight2.getX() + 20;
-                        if (carRight1.getTranslationX() > 600) {
-                            carRight1.setTranslationX(-600);
+                        if (carRight.getTranslationX() > 600) {
+                            carRight.setTranslationX(-600);
                         } else {
-                            carRight1.setX(carRightX1);
+                            carRight.setX(carRightX);
+                        }
+
+                        carLeftX = carLeft.getX() - 50;
+                        if (carLeft.getTranslationX() < -600) {
+                            carLeft.setTranslationX(600);
+                        } else {
+                            carLeft.setX(carLeftX);
+                        }
+
+                        truckLeftX = truckLeft.getX() - 70;
+                        if (truckLeft.getTranslationX() < -600) {
+                            truckLeft.setTranslationX(600);
+                        } else {
+                            truckLeft.setX(truckLeftX);
                         }
                         /*if (carRight2.getTranslationX() > 600) {
                             carRight2.setTranslationX(-600);
