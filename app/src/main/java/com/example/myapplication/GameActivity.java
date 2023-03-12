@@ -188,13 +188,19 @@ public class GameActivity extends AppCompatActivity {
 
         //Move to out of screen
         carRight.setTranslationX(-600);
-        carRight.setTranslationY(-270);
+        carRight.setTranslationY(-220);
+        carRight.setScaleX(15);
+        carRight.setScaleY(15);
 
         carLeft.setTranslationX(-600);
-        carLeft.setTranslationY(-550);
+        carLeft.setTranslationY(-510);
+        carLeft.setScaleX(15);
+        carLeft.setScaleY(15);
 
         truckLeft.setTranslationX(-600);
-        truckLeft.setTranslationY(-400);
+        truckLeft.setTranslationY(-360);
+        truckLeft.setScaleX(15);
+        truckLeft.setScaleY(15);
 
         //carRight2.setTranslationX(-500);
         //carRight2.setTranslationY(-300);

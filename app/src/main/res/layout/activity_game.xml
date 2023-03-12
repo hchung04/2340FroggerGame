@@ -123,21 +123,21 @@
     <ImageView
         android:id="@+id/redCar"
         android:layout_width="49dp"
-        android:layout_height="30dp"
+        android:layout_height="2dp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/red_car" />
 
     <ImageView
         android:id="@+id/brownCar"
         android:layout_width="49dp"
-        android:layout_height="30dp"
+        android:layout_height="2dp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/brown_car" />
 
     <ImageView
         android:id="@+id/orangeTruck"
         android:layout_width="49dp"
-        android:layout_height="30dp"
+        android:layout_height="2dp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/orange_truck" />
 
