@@ -31,13 +31,6 @@ public class SpriteTestCases {
     }
 
     @Test
-    public void checkStartingPoints() {
-        assert(sprite.setStartingPoints("Easy") == 2);
-        assert(sprite.setStartingPoints("Medium") == 1);
-        assert(sprite.setStartingPoints("Hard") == 0);
-    }
-
-    @Test
     public void movesDown(){
         float y = -637;
         assert(sprite.moveDown(y, JUMP) - y == 50);

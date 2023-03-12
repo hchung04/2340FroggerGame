@@ -54,15 +54,7 @@ public class Sprite {
         }
     }
 
-    public int setStartingPoints(String level) {
-        if (level.equals("Easy")) {
-            return 2;
-        } else if (level.equals("Medium")) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
+
 
     public float getTranslationX() {
         return this.sprite.getTranslationX();
