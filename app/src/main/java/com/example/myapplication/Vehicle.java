@@ -14,31 +14,21 @@ public class Vehicle {
         this.vehicle.setScaleY(scaleY);
     }
 
-    public float getTranslationX() {
-        return this.vehicle.getTranslationX();
+    public void updateX(String direction, int additionalToX) {
+        float vehicleX = this.vehicle.getTranslationX() + additionalToX;
+        if (direction.equals("left")) {
+            if (this.vehicle.getTranslationX() < -600) {
+                this.vehicle.setTranslationX(600);
+            } else {
+                this.vehicle.setTranslationX(vehicleX);
+            }
+        } else if (direction.equals("right")) {
+            if (this.vehicle.getTranslationX() > 600) {
+                this.vehicle.setTranslationX(-600);
+            } else {
+                this.vehicle.setTranslationX(vehicleX);
+            }
+        }
     }
-
-    public float getTranslationY() {
-        return this.vehicle.getTranslationY();
-    }
-
-    public void setScaleX(float x) {
-        this.vehicle.setScaleX(x);
-    }
-
-    public void setScaleY(float y) {
-        this.vehicle.setScaleY(y);
-    }
-
-    public void setTranslationX(float x) {
-        this.vehicle.setTranslationX(x);
-    }
-
-    public void setTranslationY(float y) {
-        this.vehicle.setTranslationY(y);
-    }
-
-
-
 
 }

@@ -5,7 +5,11 @@
     <scanScope>JavaOnly</scanScope>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
+      <option value="6f8277da-5afc-42b6-82ff-eb92d9e70a7f" />
       <option value="798b1d6f-6fde-40fa-8f35-c5c6dc800e20" />
+      <option value="8f1674a0-5b40-44c6-bc60-aa01c49b9aea" />
+      <option value="f09404eb-b314-4aca-a5f5-cefe34caaed5" />
+      <option value="f4479571-8514-4ad3-b911-1dfbeb87f979" />
     </option>
     <option name="locations">
       <list>
@@ -14,6 +18,7 @@
         <ConfigurationLocation id="798b1d6f-6fde-40fa-8f35-c5c6dc800e20" type="LOCAL_FILE" scope="All" description="234000">$PROJECT_DIR$/cs2340_checks (1).xml</ConfigurationLocation>
         <ConfigurationLocation id="f09404eb-b314-4aca-a5f5-cefe34caaed5" type="LOCAL_FILE" scope="All" description="CS2340">$PROJECT_DIR$/cs2340_checks.xml</ConfigurationLocation>
         <ConfigurationLocation id="f4479571-8514-4ad3-b911-1dfbeb87f979" type="LOCAL_FILE" scope="All" description="CS2340 Checkstyle">$PROJECT_DIR$/../Project (not local repo)/cs2340_checkstyle.xml</ConfigurationLocation>
+        <ConfigurationLocation id="8f1674a0-5b40-44c6-bc60-aa01c49b9aea" type="LOCAL_FILE" scope="All" description="final2340">$PROJECT_DIR$/cs2340_checks.xml</ConfigurationLocation>
         <ConfigurationLocation id="6f8277da-5afc-42b6-82ff-eb92d9e70a7f" type="LOCAL_FILE" scope="All" description="st">$PROJECT_DIR$/cs2340_checks.xml</ConfigurationLocation>
       </list>
     </option>

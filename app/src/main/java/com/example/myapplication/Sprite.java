@@ -6,10 +6,12 @@ import android.widget.ImageView;
 public class Sprite {
 
     private ImageView sprite;
+    private int livesRemaining;
 
-    public Sprite(ImageView sprite, Bitmap spriteImage) {
+    public Sprite(ImageView sprite, Bitmap spriteImage, String level) {
         this.sprite = sprite;
         this.sprite.setImageBitmap(spriteImage);
+        this.livesRemaining = setLives(level);
     }
 
     public Sprite() {
@@ -54,7 +56,9 @@ public class Sprite {
         }
     }
 
-
+    public int getLivesRemaining() {
+        return this.livesRemaining;
+    }
 
     public float getTranslationX() {
         return this.sprite.getTranslationX();
