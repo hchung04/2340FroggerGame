@@ -58,22 +58,25 @@ public class GameActivity extends AppCompatActivity {
         level = findViewById(R.id.level);
 
         Score score = new Score();
-        carRight = (ImageView) findViewById(R.id.redCar);
-        //carRight2 = (ImageView) findViewById(R.id.redCar2);
-        carLeft = (ImageView) findViewById(R.id.brownCar);
-        truckLeft = (ImageView) findViewById(R.id.orangeTruck);
+
+        //VEHICLES
+        //Sets starting position and scale
+        Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -220, 15, 15);
+        Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -510, 15, 15);
+        Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -360, 15, 15);
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
         pointsCounter.setText("Points: " + score.getScore());
+
         //width and height of tiles and sprite
         int width = (int) getResources().getDimension(R.dimen.tile_width);
         int height = (int) getResources().getDimension(R.dimen.tile_height);
 
         Intent retrieveConfigurationData = getIntent();
 
+        //set name and level to player's choice
         String nameInput = retrieveConfigurationData.getStringExtra("name_key");
-        // display the string into textView
         name.setText(nameInput);
 
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
@@ -83,11 +86,6 @@ public class GameActivity extends AppCompatActivity {
 
         int livesRemaining = sprite.setLives(levelInput);
         livesCounter.setText("Lives: " + livesRemaining);
-
-
-        int startingPoints = 0;
-        pointsCounter = (TextView) findViewById(R.id.pointCounter);
-        pointsCounter.setText("Points: " + startingPoints);
 
         LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
         ArrayList<LinearLayout> rows = new ArrayList<>();
@@ -182,23 +180,6 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-
-        //Move to out of screen
-        carRight.setTranslationX(-600);
-        carRight.setTranslationY(-220);
-        carRight.setScaleX(15);
-        carRight.setScaleY(15);
-
-        carLeft.setTranslationX(-600);
-        carLeft.setTranslationY(-510);
-        carLeft.setScaleX(15);
-        carLeft.setScaleY(15);
-
-        truckLeft.setTranslationX(-600);
-        truckLeft.setTranslationY(-360);
-        truckLeft.setScaleX(15);
-        truckLeft.setScaleY(15);
-
         //carRight2.setTranslationX(-500);
         //carRight2.setTranslationY(-300);
 
@@ -209,26 +190,26 @@ public class GameActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        carRightX = carRight.getX() + 20;
+                        carRightX = carRight.getTranslationX() + 20;
                         //carRightX2 = carRight2.getX() + 20;
                         if (carRight.getTranslationX() > 600) {
                             carRight.setTranslationX(-600);
                         } else {
-                            carRight.setX(carRightX);
+                            carRight.setTranslationX(carRightX);
                         }
 
-                        carLeftX = carLeft.getX() - 50;
+                        carLeftX = carLeft.getTranslationX() - 50;
                         if (carLeft.getTranslationX() < -600) {
                             carLeft.setTranslationX(600);
                         } else {
-                            carLeft.setX(carLeftX);
+                            carLeft.setTranslationX(carLeftX);
                         }
 
-                        truckLeftX = truckLeft.getX() - 70;
+                        truckLeftX = truckLeft.getTranslationX() - 70;
                         if (truckLeft.getTranslationX() < -600) {
                             truckLeft.setTranslationX(600);
                         } else {
-                            truckLeft.setX(truckLeftX);
+                            truckLeft.setTranslationX(truckLeftX);
                         }
                         /*if (carRight2.getTranslationX() > 600) {
                             carRight2.setTranslationX(-600);
