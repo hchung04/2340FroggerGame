@@ -79,12 +79,13 @@ public class GameActivity extends AppCompatActivity {
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
         level.setText(levelInput);
 
-        int livesRemaining = setLives(levelInput);
-        livesCounter.setText("Lives: " + livesRemaining);
-
         Sprite sprite = new Sprite(findViewById(R.id.sprite), retrieveConfigurationData.getParcelableExtra("player_key"));
 
-        int startingPoints = setPoints(levelInput);
+        int livesRemaining = sprite.setLives(levelInput);
+        livesCounter.setText("Lives: " + livesRemaining);
+
+
+        int startingPoints = 0;
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
         pointsCounter.setText("Points: " + startingPoints);
 
@@ -123,63 +124,63 @@ public class GameActivity extends AppCompatActivity {
                     tileType = R.drawable.water;
 
                 }
-                    if (j % 2 == 0 && i == 0) {
-                        tileType = R.drawable.tileset_brick_wall;
-                    }
-                    ImageView tile = new ImageView(this);
-                    tile.setImageResource(tileType);
-                    row.addView(tile);
-                    tile.setLayoutParams(params);
-
+                if (j % 2 == 0 && i == 0) {
+                    tileType = R.drawable.tileset_brick_wall;
                 }
+                ImageView tile = new ImageView(this);
+                tile.setImageResource(tileType);
+                row.addView(tile);
+                tile.setLayoutParams(params);
+
             }
+        }
 
-            int jump = (int) getResources().getDimension(R.dimen.tile_width);
+        int jump = (int) getResources().getDimension(R.dimen.tile_width);
 
-            ImageView upButton = (ImageView) findViewById(R.id.upButton);
-            upButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    float y = sprite.getTranslationY();
+        ImageView upButton = (ImageView) findViewById(R.id.upButton);
+        upButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float y = sprite.getTranslationY();
 
                 if (y - jump >= -10 * jump || y == 0) {
                     sprite.setTranslationY(y - jump);
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
                 }
-            }});
-
-            ImageView downButton = (ImageView) findViewById(R.id.downButton);
-            downButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    float y = sprite.getTranslationY();
-
-                    if (y + jump <= -jump) {
-                        sprite.setTranslationY(y + jump);
-                    }
-                }
-            });
-
-            ImageView leftButton = (ImageView) findViewById(R.id.leftButton);
-            leftButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    float x = sprite.getTranslationX();
-
-                    if (x - jump >= -411) {
-                        sprite.setTranslationX(x - jump);
-                    }
-                }
-            });
-
-            ImageView rightButton = (ImageView) findViewById(R.id.rightButton);
-            rightButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    float x = sprite.getTranslationX();
-
-                    if (x + jump <= 411) {
-                        sprite.setTranslationX(x + jump);
-                    }
-                }
+            }
         });
 
+        ImageView downButton = (ImageView) findViewById(R.id.downButton);
+        downButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float y = sprite.getTranslationY();
+
+                if (y + jump <= -jump) {
+                    sprite.setTranslationY(y + jump);
+                }
+            }
+        });
+
+        ImageView leftButton = (ImageView) findViewById(R.id.leftButton);
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float x = sprite.getTranslationX();
+
+                if (x - jump >= -411) {
+                    sprite.setTranslationX(x - jump);
+                }
+            }
+        });
+
+        ImageView rightButton = (ImageView) findViewById(R.id.rightButton);
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                float x = sprite.getTranslationX();
+
+                if (x + jump <= 411) {
+                    sprite.setTranslationX(x + jump);
+                }
+            }
+        });
 
 
         //Move to out of screen
@@ -240,27 +241,6 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 0, 100);
 
-    }
-
-
-    public int setLives(String level) {
-        if (level.equals("Easy")) {
-            return 3;
-        } else if (level.equals("Medium")) {
-            return 2;
-        } else {
-            return 1;
-        }
-    }
-
-    public int setPoints(String level) {
-        if (level.equals("Easy")) {
-            return 2;
-        } else if (level.equals("Medium")) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 
     }
