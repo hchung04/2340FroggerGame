@@ -152,6 +152,7 @@ public class ConfigurationActivity extends AppCompatActivity {
     // Sends name here to GameActivity
     private void switchToGameActivity(String name, String gameDifficulty) {
         Intent switchActivityIntent = new Intent(this, GameActivity.class);
+
         switchActivityIntent.putExtra("name_key", name);
         switchActivityIntent.putExtra("level_key", gameDifficulty);
 

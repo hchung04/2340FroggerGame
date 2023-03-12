@@ -122,9 +122,9 @@ public class GameActivity extends AppCompatActivity {
         ImageView upButton = (ImageView) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                float y = sprite.getTranslationY();
-                if (y - jump >= -10 * jump || y == 0) {
-                    sprite.setTranslationY(y - jump);
+                float oldTranslation = sprite.getTranslationY();
+                sprite.moveUp(jump);
+                if (sprite.movedUp(oldTranslation, sprite.getTranslationY())) {
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
                 }
             }
@@ -133,30 +133,21 @@ public class GameActivity extends AppCompatActivity {
         ImageView downButton = (ImageView) findViewById(R.id.downButton);
         downButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                float y = sprite.getTranslationY();
-                if (y + jump <= -jump) {
-                    sprite.setTranslationY(y + jump);
-                }
+                sprite.moveDown(jump);
             }
         });
 
         ImageView leftButton = (ImageView) findViewById(R.id.leftButton);
         leftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                float x = sprite.getTranslationX();
-                if (x - jump >= -411) {
-                    sprite.setTranslationX(x - jump);
-                }
+                sprite.moveLeft(jump);
             }
         });
 
         ImageView rightButton = (ImageView) findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                float x = sprite.getTranslationX();
-                if (x + jump <= 411) {
-                    sprite.setTranslationX(x + jump);
-                }
+                sprite.moveRight(jump);
             }
         });
         timer.schedule(new TimerTask() {
