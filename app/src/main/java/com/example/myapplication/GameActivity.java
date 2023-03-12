@@ -27,7 +27,6 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView name;
     private TextView level;
-    private ImageView sprite;
 
     private ImageView carRight;
     //private ImageView carRight2;
@@ -57,7 +56,6 @@ public class GameActivity extends AppCompatActivity {
         livesCounter = (TextView) findViewById(R.id.livesCounter);
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
-        sprite = (ImageView) findViewById(R.id.sprite);
 
         Score score = new Score();
         carRight = (ImageView) findViewById(R.id.redCar);
@@ -84,9 +82,7 @@ public class GameActivity extends AppCompatActivity {
         int livesRemaining = setLives(levelInput);
         livesCounter.setText("Lives: " + livesRemaining);
 
-
-        Bitmap spriteInput = retrieveConfigurationData.getParcelableExtra("player_key");
-        sprite.setImageBitmap(spriteInput);
+        Sprite sprite = new Sprite(findViewById(R.id.sprite), retrieveConfigurationData.getParcelableExtra("player_key"));
 
         int startingPoints = setPoints(levelInput);
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
