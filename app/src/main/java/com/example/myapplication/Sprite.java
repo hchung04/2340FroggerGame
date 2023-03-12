@@ -1,28 +1,43 @@
 package com.example.myapplication;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
 public class Sprite {
-    public static float moveUp(float initYCoord, float jump) {
+
+    private ImageView sprite;
+
+    public Sprite(ImageView sprite, Bitmap spriteImage) {
+        this.sprite = sprite;
+        this.sprite.setImageBitmap(spriteImage);
+    }
+
+    public Sprite() {
+
+    }
+
+    public float moveUp(float initYCoord, float jump) {
         if (initYCoord - jump >= -10 * jump || initYCoord == 0) {
             return initYCoord - jump;
         }
         return initYCoord;
     }
   
-    public static float moveDown(float initYCoord, float jump) {
+    public float moveDown(float initYCoord, float jump) {
         if (initYCoord + jump <= -jump) {
             return initYCoord + jump;
         }
         return initYCoord;
     }
 
-    public static float moveRight(float initXCoord, float jump) {
+    public float moveRight(float initXCoord, float jump) {
         if (initXCoord + jump <= 411) {
             return initXCoord + jump;
         }
         return initXCoord;
     }
 
-    public static float moveLeft(float initXCoord, float jump) {
+    public float moveLeft(float initXCoord, float jump) {
         if (initXCoord - jump >= -411) {
             return initXCoord - jump;
         }
@@ -47,5 +62,21 @@ public class Sprite {
         } else {
             return 0;
         }
+    }
+
+    public float getTranslationX() {
+        return this.sprite.getTranslationX();
+    }
+
+    public float getTranslationY() {
+        return this.sprite.getTranslationY();
+    }
+
+    public void setTranslationX(float x) {
+        this.sprite.setTranslationX(x);
+    }
+
+    public void setTranslationY(float y) {
+        this.sprite.setTranslationY(y);
     }
 }
