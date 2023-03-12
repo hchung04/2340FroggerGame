@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.graphics.Bitmap;
+import android.view.View;
 import android.widget.ImageView;
 
 public class Sprite {
@@ -12,38 +13,39 @@ public class Sprite {
         this.sprite = sprite;
         this.sprite.setImageBitmap(spriteImage);
         this.livesRemaining = setLives(level);
-    }
-
-    public Sprite() {
 
     }
 
-    public float moveUp(float initYCoord, float jump) {
-        if (initYCoord - jump >= -10 * jump || initYCoord == 0) {
-            return initYCoord - jump;
+    public void moveUp(float jump) {
+        if (this.sprite.getTranslationY() - jump >= -10 * jump || sprite.getTranslationY() == 0) {
+            float newY = this.sprite.getTranslationY() - jump;
+            this.sprite.setTranslationY(newY);
         }
-        return initYCoord;
-    }
-  
-    public float moveDown(float initYCoord, float jump) {
-        if (initYCoord + jump <= -jump) {
-            return initYCoord + jump;
-        }
-        return initYCoord;
     }
 
-    public float moveRight(float initXCoord, float jump) {
-        if (initXCoord + jump <= 411) {
-            return initXCoord + jump;
+    public void moveDown(float jump) {
+        if (this.sprite.getTranslationY() + jump <= -jump) {
+            float newY = this.sprite.getTranslationY() + jump;
+            this.sprite.setTranslationY(newY);
         }
-        return initXCoord;
     }
 
-    public float moveLeft(float initXCoord, float jump) {
-        if (initXCoord - jump >= -411) {
-            return initXCoord - jump;
+    public void moveRight(float jump) {
+        if (this.sprite.getTranslationX() + jump <= 411) {
+            float newX = this.sprite.getTranslationX() + jump;
+            this.sprite.setTranslationX(newX);
         }
-        return initXCoord;
+    }
+
+    public void moveLeft(float jump) {
+        if (this.sprite.getTranslationX() - jump >= -411) {
+            float newX = this.sprite.getTranslationX() - jump;
+            this.sprite.setTranslationX(newX);
+        }
+    }
+
+    public boolean movedUp(float oldCoord, float newCoord) {
+        return oldCoord != newCoord;
     }
 
     public int setLives(String level) {
