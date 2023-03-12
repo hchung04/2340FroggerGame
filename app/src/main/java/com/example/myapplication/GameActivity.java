@@ -4,15 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Point;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,9 +23,6 @@ public class GameActivity extends AppCompatActivity {
     private TextView name;
     private TextView level;
 
-    private ImageView carRight;
-    //private ImageView carRight2;
-
     private ImageView carLeft;
     private ImageView truckLeft;
 
@@ -38,7 +30,6 @@ public class GameActivity extends AppCompatActivity {
 
     //position
     private float carRightX;
-    //private float carRightX2;
     private float carLeftX;
     private float truckLeftX;
 
@@ -59,8 +50,7 @@ public class GameActivity extends AppCompatActivity {
 
         Score score = new Score();
 
-        //VEHICLES
-        //Sets starting position and scale
+        //VEHICLES, sets starting position and scale
         Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -220, 15, 15);
         Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -510, 15, 15);
         Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -360, 15, 15);
@@ -77,15 +67,14 @@ public class GameActivity extends AppCompatActivity {
 
         //set name and level to player's choice
         String nameInput = retrieveConfigurationData.getStringExtra("name_key");
-        name.setText(nameInput);
-
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
+
+        Sprite sprite = new Sprite(findViewById(R.id.sprite),
+                retrieveConfigurationData.getParcelableExtra("player_key"), levelInput);
+
+        name.setText(nameInput);
         level.setText(levelInput);
-
-        Sprite sprite = new Sprite(findViewById(R.id.sprite), retrieveConfigurationData.getParcelableExtra("player_key"));
-
-        int livesRemaining = sprite.setLives(levelInput);
-        livesCounter.setText("Lives: " + livesRemaining);
+        livesCounter.setText("Lives: " + sprite.getLivesRemaining());
 
         LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
         ArrayList<LinearLayout> rows = new ArrayList<>();
@@ -100,8 +89,6 @@ public class GameActivity extends AppCompatActivity {
             row.setOrientation(LinearLayout.HORIZONTAL);
             rows.add(row);
             int tileType;
-
-
             //Sets number of tiles per row
             //Total tiles per row: 8
             for (int j = 0; j < 8; j++) {
@@ -120,7 +107,6 @@ public class GameActivity extends AppCompatActivity {
                 }
                 if (i == 3) {
                     tileType = R.drawable.water;
-
                 }
                 if (j % 2 == 0 && i == 0) {
                     tileType = R.drawable.tileset_brick_wall;
@@ -129,17 +115,14 @@ public class GameActivity extends AppCompatActivity {
                 tile.setImageResource(tileType);
                 row.addView(tile);
                 tile.setLayoutParams(params);
-
             }
         }
 
         int jump = (int) getResources().getDimension(R.dimen.tile_width);
-
         ImageView upButton = (ImageView) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 float y = sprite.getTranslationY();
-
                 if (y - jump >= -10 * jump || y == 0) {
                     sprite.setTranslationY(y - jump);
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
@@ -151,7 +134,6 @@ public class GameActivity extends AppCompatActivity {
         downButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 float y = sprite.getTranslationY();
-
                 if (y + jump <= -jump) {
                     sprite.setTranslationY(y + jump);
                 }
@@ -162,7 +144,6 @@ public class GameActivity extends AppCompatActivity {
         leftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 float x = sprite.getTranslationX();
-
                 if (x - jump >= -411) {
                     sprite.setTranslationX(x - jump);
                 }
@@ -173,55 +154,24 @@ public class GameActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 float x = sprite.getTranslationX();
-
                 if (x + jump <= 411) {
                     sprite.setTranslationX(x + jump);
                 }
             }
         });
-
-        //carRight2.setTranslationX(-500);
-        //carRight2.setTranslationY(-300);
-
-
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        carRightX = carRight.getTranslationX() + 20;
-                        //carRightX2 = carRight2.getX() + 20;
-                        if (carRight.getTranslationX() > 600) {
-                            carRight.setTranslationX(-600);
-                        } else {
-                            carRight.setTranslationX(carRightX);
-                        }
-
-                        carLeftX = carLeft.getTranslationX() - 50;
-                        if (carLeft.getTranslationX() < -600) {
-                            carLeft.setTranslationX(600);
-                        } else {
-                            carLeft.setTranslationX(carLeftX);
-                        }
-
-                        truckLeftX = truckLeft.getTranslationX() - 70;
-                        if (truckLeft.getTranslationX() < -600) {
-                            truckLeft.setTranslationX(600);
-                        } else {
-                            truckLeft.setTranslationX(truckLeftX);
-                        }
-                        /*if (carRight2.getTranslationX() > 600) {
-                            carRight2.setTranslationX(-600);
-                        } else {
-                            carRight2.setX(carRightX2);
-                        }*/
-
+                        carRight.updateX("right", 20);
+                        carLeft.updateX("left", -50);
+                        truckLeft.updateX("left", -70);
                     }
                 });
             }
         }, 0, 100);
-
     }
 
-    }
+}
