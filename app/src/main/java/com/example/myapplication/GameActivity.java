@@ -51,9 +51,9 @@ public class GameActivity extends AppCompatActivity {
         Score score = new Score();
 
         //VEHICLES, sets starting position and scale
-        Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -220, 15, 15);
-        Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -510, 15, 15);
-        Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -360, 15, 15);
+        Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -620, 15, 15);
+        Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -900, 15, 15);
+        Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -770, 15, 15);
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
@@ -92,21 +92,12 @@ public class GameActivity extends AppCompatActivity {
             //Sets number of tiles per row
             //Total tiles per row: 8
             for (int j = 0; j < 8; j++) {
-                if (i % 2 == 0) {
-                    tileType = R.drawable.water;
-                } else if (i == 5) {
+                if (i == 6 || i == 5 || i == 4) {
                     tileType = R.drawable.road_tile;
+                } else if (i % 2 == 0 || i == 3) {
+                    tileType = R.drawable.water;
                 } else {
                     tileType = R.drawable.grass__0;
-                }
-                if (i == 5) {
-                    tileType = R.drawable.road_tile;
-                }
-                if (i == 4) {
-                    tileType = R.drawable.road_tile;
-                }
-                if (i == 3) {
-                    tileType = R.drawable.water;
                 }
                 if (j % 2 == 0 && i == 0) {
                     tileType = R.drawable.tileset_brick_wall;
