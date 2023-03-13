@@ -41,5 +41,24 @@ public class SprintThreeTestCases {
         assert(3 == score.updateScore(y)); // updates when farthest distance traveled is exceeded
     }
 
+    //Case where vehicle needs to move left: checks that vehicle starts back all the way at the left of the screen
+    //Case where vehicle needs to move right: checks that vehicle starts all the way back at the left of the screen
+    @Test
+    public void movesIntoViewFromOffScreen(){
+        float initialTranslationMoveLeft = -700;
+        assert(Vehicle.updateX2(initialTranslationMoveLeft,"left", 50) == 600);
+
+        float initialTranslationMoveRight = 700;
+        assert(Vehicle.updateX2(initialTranslationMoveRight,"right", 50) == -600);
+    }
+
+    //Case where vehicle needs to move left: checks that vehicle moves left properly
+    @Test
+    public void movesLeft(){
+        float initialTranslationMoveLeft = 500;
+        assert(Vehicle.updateX2(initialTranslationMoveLeft,"left", -50) == 450);
+
+    }
+
 }
 
