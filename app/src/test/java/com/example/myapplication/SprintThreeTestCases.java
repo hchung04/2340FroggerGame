@@ -60,5 +60,22 @@ public class SprintThreeTestCases {
 
     }
 
+    //Case where vehicle needs to move right: checks that vehicle moves right properly
+    @Test
+    public void movesRight(){
+        float initialTranslationMoveRight = -500;
+        assert(Vehicle.updateX2(initialTranslationMoveRight,"right", 50) == -450);
+
+    }
+
+    //Case to test that the vehicle is spawn inside the grid coordinates
+    @Test
+    public void vehicleOnGrid() {
+        float initializationLeft = -600;
+        float initializationRight = 600;
+        assert(Vehicle.updateX2(initializationLeft, "left", 0) == -600);
+        assert(Vehicle.updateX2(initializationRight, "right", 0) == 600);
+    }
+
 }
 
