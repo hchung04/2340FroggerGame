@@ -8,6 +8,8 @@ public class Vehicle {
 
     public Vehicle(ImageView vehicle, float startingX, float startingY, float scaleX, float scaleY) {
         this.vehicle = vehicle;
+        this.vehicle.setScaleX(scaleX);
+        this.vehicle.setScaleY(scaleY);
         this.vehicle.setTranslationX(startingX);
         this.vehicle.setTranslationY(startingY);
         this.vehicle.setScaleX(scaleX);
