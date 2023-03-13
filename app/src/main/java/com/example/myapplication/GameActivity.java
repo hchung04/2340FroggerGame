@@ -51,9 +51,9 @@ public class GameActivity extends AppCompatActivity {
         Score score = new Score();
 
         //VEHICLES, sets starting position and scale
-        Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -220, 15, 15);
-        Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -510, 15, 15);
-        Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -360, 15, 15);
+        Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -950, 15, 15);
+        Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -830, 15, 15);
+        Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -1010, 15, 15);
 
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
