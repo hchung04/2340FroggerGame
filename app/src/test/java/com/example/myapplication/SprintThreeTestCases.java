@@ -91,7 +91,32 @@ public class SprintThreeTestCases {
         assert(carLeftSpeed != truckSpeed);
     }
 
+    // Checks that vehicles do not collide
+    @Test
+    public void noCollisionsAtStart() {
+        float carRightInitialY = -620;
+        float carLeftInitialY = -900;
+        float truckLeftInitialY = -770;
+        assert(Vehicle.positionY(carRightInitialY) != Vehicle.positionY(carLeftInitialY));
+        assert(Vehicle.positionY(carRightInitialY) != Vehicle.positionY(truckLeftInitialY));
+        assert(Vehicle.positionY(carLeftInitialY) != Vehicle.positionY(truckLeftInitialY));
+    }
 
+    // Check that vehicles also do not collide when moving
+    @Test
+    public void noMovingCollisions() {
+        float initializationLeft = -600;
+        float initializationRight = 600;
+        float carRightInitialY = -620;
+        float carLeftInitialY = -900;
+        float truckLeftInitialY = -770;
+        assert(Vehicle.updateX2(initializationLeft, carLeftInitialY, "left", 0)[1]
+                != Vehicle.updateX2(initializationRight, carRightInitialY, "right", 0)[1]);
+        assert(Vehicle.updateX2(initializationLeft, carLeftInitialY, "left", 0)[1]
+                != Vehicle.updateX2(initializationLeft, truckLeftInitialY, "left", 0)[1]);
+        assert(Vehicle.updateX2(initializationRight, carRightInitialY, "right", 0)[1]
+                != Vehicle.updateX2(initializationLeft, truckLeftInitialY, "left", 0)[1]);
+    }
 
 }
 

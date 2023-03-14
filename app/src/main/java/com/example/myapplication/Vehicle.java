@@ -34,22 +34,23 @@ public class Vehicle {
         }
     }
 
-    public static float updateX2(float translationX, String direction, int additionalToX) {
+    public static float[] updateX2(float translationX, float translationY, String direction, int additionalToX) {
         float vehicleX = translationX + additionalToX;
+        float[] posArray = {vehicleX, translationY};
         if (direction.equals("left")) {
             if (translationX < -600) {
-                return 600;
-            } else {
-                return vehicleX;
+                posArray[0] = 600;
             }
         } else if (direction.equals("right")) {
             if (translationX > 600) {
-                return -600;
-            } else {
-                return vehicleX;
+                posArray[0] = -600;
             }
         }
-        return vehicleX;
+        return posArray;
+    }
+
+    public static float positionY(float translationY) {
+        return translationY;
     }
 
 
