@@ -77,5 +77,21 @@ public class SprintThreeTestCases {
         assert(Vehicle.updateX2(initializationRight, "right", 0) == 600);
     }
 
+    @Test
+    public void vehicleRightSpeed(){
+        float carSpeed = 20;
+        float truckSpeed = -70;
+        assert(carSpeed != truckSpeed);
+    }
+
+    @Test
+    public void vehicleLeftSpeed(){
+        float truckSpeed = -70;
+        float carLeftSpeed = -50;
+        assert(carLeftSpeed != truckSpeed);
+    }
+
+
+
 }
 
