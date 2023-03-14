@@ -49,9 +49,4 @@ public class Vehicle {
         return posArray;
     }
 
-    public static float positionY(float translationY) {
-        return translationY;
-    }
-
-
 }

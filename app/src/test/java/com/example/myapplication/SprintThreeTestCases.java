@@ -9,8 +9,9 @@ import org.junit.Test;
  */
 public class SprintThreeTestCases {
     private final float JUMP = 50;
+    private final float exampleInitialY = -300;
     @Test
-    public void updatesScore(){
+    public void updatesScore() {
         Score score = new Score();
         float y = 0;
         assert(0 == score.getScore());
@@ -44,27 +45,28 @@ public class SprintThreeTestCases {
     //Case where vehicle needs to move left: checks that vehicle starts back all the way at the left of the screen
     //Case where vehicle needs to move right: checks that vehicle starts all the way back at the left of the screen
     @Test
-    public void movesIntoViewFromOffScreen(){
+    public void movesIntoViewFromOffScreen() {
         float initialTranslationMoveLeft = -700;
-        assert(Vehicle.updateX2(initialTranslationMoveLeft,"left", 50) == 600);
+        assert(Vehicle.updateX2(initialTranslationMoveLeft, exampleInitialY, "left", 50)[0] == 600);
 
         float initialTranslationMoveRight = 700;
-        assert(Vehicle.updateX2(initialTranslationMoveRight,"right", 50) == -600);
+        assert(Vehicle.updateX2(initialTranslationMoveRight, exampleInitialY, "right", 50)[0] == -600);
     }
 
     //Case where vehicle needs to move left: checks that vehicle moves left properly
     @Test
-    public void movesLeft(){
+    public void movesLeft() {
         float initialTranslationMoveLeft = 500;
-        assert(Vehicle.updateX2(initialTranslationMoveLeft,"left", -50) == 450);
+        assert(Vehicle.updateX2(initialTranslationMoveLeft, exampleInitialY, "left", -50)[0] == 450);
 
     }
 
     //Case where vehicle needs to move right: checks that vehicle moves right properly
     @Test
-    public void movesRight(){
+    public void movesRight() {
+
         float initialTranslationMoveRight = -500;
-        assert(Vehicle.updateX2(initialTranslationMoveRight,"right", 50) == -450);
+        assert(Vehicle.updateX2(initialTranslationMoveRight, exampleInitialY, "right", 50)[0] == -450);
 
     }
 
@@ -73,33 +75,40 @@ public class SprintThreeTestCases {
     public void vehicleOnGrid() {
         float initializationLeft = -600;
         float initializationRight = 600;
-        assert(Vehicle.updateX2(initializationLeft, "left", 0) == -600);
-        assert(Vehicle.updateX2(initializationRight, "right", 0) == 600);
+        assert(Vehicle.updateX2(initializationLeft, exampleInitialY, "left", 0)[0] == -600);
+        assert(Vehicle.updateX2(initializationRight, exampleInitialY, "right", 0)[0] == 600);
     }
 
     @Test
-    public void vehicleRightSpeed(){
+    public void vehicleRightSpeed() {
         float carSpeed = 20;
         float truckSpeed = -70;
         assert(carSpeed != truckSpeed);
     }
 
     @Test
-    public void vehicleLeftSpeed(){
+    public void vehicleLeftSpeed() {
         float truckSpeed = -70;
         float carLeftSpeed = -50;
         assert(carLeftSpeed != truckSpeed);
     }
 
-    // Checks that vehicles do not collide
+    // Checks that vehicles do not collide when initialized on grid
     @Test
     public void noCollisionsAtStart() {
+        float initializationLeft = -600;
+        float initializationRight = 600;
         float carRightInitialY = -620;
         float carLeftInitialY = -900;
         float truckLeftInitialY = -770;
-        assert(Vehicle.positionY(carRightInitialY) != Vehicle.positionY(carLeftInitialY));
-        assert(Vehicle.positionY(carRightInitialY) != Vehicle.positionY(truckLeftInitialY));
-        assert(Vehicle.positionY(carLeftInitialY) != Vehicle.positionY(truckLeftInitialY));
+
+        float carRightY = Vehicle.updateX2(initializationRight, carRightInitialY, "right", 0)[1];
+        float carLeftY = Vehicle.updateX2(initializationLeft, carLeftInitialY, "left", 0)[1];
+        float truckLeftY = Vehicle.updateX2(initializationLeft, truckLeftInitialY, "left", 0)[1];
+
+        assert(carRightY != carLeftY);
+        assert(carRightY != truckLeftY);
+        assert(carLeftY != truckLeftY);
     }
 
     // Check that vehicles also do not collide when moving
@@ -110,12 +119,14 @@ public class SprintThreeTestCases {
         float carRightInitialY = -620;
         float carLeftInitialY = -900;
         float truckLeftInitialY = -770;
-        assert(Vehicle.updateX2(initializationLeft, carLeftInitialY, "left", 0)[1]
-                != Vehicle.updateX2(initializationRight, carRightInitialY, "right", 0)[1]);
-        assert(Vehicle.updateX2(initializationLeft, carLeftInitialY, "left", 0)[1]
-                != Vehicle.updateX2(initializationLeft, truckLeftInitialY, "left", 0)[1]);
-        assert(Vehicle.updateX2(initializationRight, carRightInitialY, "right", 0)[1]
-                != Vehicle.updateX2(initializationLeft, truckLeftInitialY, "left", 0)[1]);
+
+        float carRightY = Vehicle.updateX2(initializationRight, carRightInitialY, "right", 50)[1];
+        float carLeftY = Vehicle.updateX2(initializationLeft, carLeftInitialY, "left", 50)[1];
+        float truckLeftY = Vehicle.updateX2(initializationLeft, truckLeftInitialY, "left", 50)[1];
+
+        assert(carRightY != carLeftY);
+        assert(carRightY != truckLeftY);
+        assert(carLeftY != truckLeftY);
     }
 
 }
