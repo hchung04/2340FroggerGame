@@ -39,7 +39,8 @@ public class SprintThreeTestCases {
         y -= JUMP;
         assert(2 == score.updateScore(y)); // at farthest distance traveled
         y -= JUMP;
-        assert(3 == score.updateScore(y)); // updates when farthest distance traveled is exceeded
+        assert(4 == score.updateScore(y)); // updates when farthest distance traveled is exceeded
+        // score is incremented by 2 bc the second row is an obstacle row
     }
 
     //Case where vehicle needs to move left: checks that vehicle starts back all the way at the left of the screen
