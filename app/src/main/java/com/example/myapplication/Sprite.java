@@ -21,6 +21,7 @@ public class Sprite {
             float newY = this.sprite.getTranslationY() - jump;
             this.sprite.setTranslationY(newY);
         }
+
     }
 
     public void moveDown(float jump) {
