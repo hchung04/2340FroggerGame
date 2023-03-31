@@ -29,7 +29,12 @@ public class MovingObject {
                 this.movingObject.setTranslationX(vehicleX);
             }
         }
+    }
 
+    public boolean checkCollision(Sprite sprite) {
+        boolean xEqual = sprite.getTranslationX() == this.movingObject.getTranslationX();
+        boolean yEqual = sprite.getTranslationY() == this.movingObject.getTranslationY();
+        return xEqual && yEqual;
     }
 
 }
