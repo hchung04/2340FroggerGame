@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -154,6 +156,14 @@ public class GameActivity extends AppCompatActivity {
                 });
             }
         }, 0, 100);
+    }
+    private void switchToGameOverActivity(int points, int highScore) {
+        Intent switchActivityIntent = new Intent(this, GameOverActivity.class);
+
+        switchActivityIntent.putExtra("points", points + "");
+        switchActivityIntent.putExtra("high_score", highScore + "");
+        this.finish();
+        startActivity(switchActivityIntent);
     }
 
 }

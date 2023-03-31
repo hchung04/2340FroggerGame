@@ -159,6 +159,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         // Convert Drawable chosenSprite to Bitmap in order to send to GameActivity
         Bitmap sendSprite = (Bitmap) ((BitmapDrawable) chosenSprite).getBitmap();
         switchActivityIntent.putExtra("player_key", sendSprite);
+        this.finish();
         startActivity(switchActivityIntent);
     }
 }
