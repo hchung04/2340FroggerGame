@@ -97,7 +97,11 @@ public class GameActivity extends AppCompatActivity {
                 if (i == 6 || i == 5 || i == 4) {
                     tileType = R.drawable.road_tile;
                 } else if (i % 2 == 0 || i == 3) {
-                    tileType = R.drawable.water;
+                    if (j == 3) {
+                        tileType = R.drawable.grass__0;
+                    } else {
+                        tileType = R.drawable.water;
+                    }
                 } else {
                     tileType = R.drawable.grass__0;
                 }
@@ -111,6 +115,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+
         int jump = (int) getResources().getDimension(R.dimen.tile_width);
         ImageView upButton = (ImageView) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +125,8 @@ public class GameActivity extends AppCompatActivity {
                 if (sprite.movedUp(oldTranslation, sprite.getTranslationY())) {
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
                 }
+                sprite.checkWater();
+
             }
         });
 
@@ -127,6 +134,7 @@ public class GameActivity extends AppCompatActivity {
         downButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveDown(jump);
+                sprite.checkWater();
             }
         });
 
@@ -134,6 +142,8 @@ public class GameActivity extends AppCompatActivity {
         leftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveLeft(jump);
+                sprite.checkWater();
+
             }
         });
 
@@ -141,6 +151,8 @@ public class GameActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveRight(jump);
+                sprite.checkWater();
+
             }
         });
         timer.schedule(new TimerTask() {
@@ -152,6 +164,7 @@ public class GameActivity extends AppCompatActivity {
                         carRight.updateX("right", 20);
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
+                        System.out.println(sprite.getTranslationX());
                     }
                 });
             }

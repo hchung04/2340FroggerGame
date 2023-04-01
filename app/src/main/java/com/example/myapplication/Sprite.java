@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class Sprite {
 
     private ImageView sprite;
@@ -13,7 +15,6 @@ public class Sprite {
         this.sprite = sprite;
         this.sprite.setImageBitmap(spriteImage);
         this.livesRemaining = setLives(level);
-
     }
 
     public void moveUp(float jump) {
@@ -21,6 +22,7 @@ public class Sprite {
             float newY = this.sprite.getTranslationY() - jump;
             this.sprite.setTranslationY(newY);
         }
+        checkWater();
 
     }
 
@@ -29,6 +31,7 @@ public class Sprite {
             float newY = this.sprite.getTranslationY() + jump;
             this.sprite.setTranslationY(newY);
         }
+//        checkWater();
     }
 
     public void moveRight(float jump) {
@@ -36,6 +39,7 @@ public class Sprite {
             float newX = this.sprite.getTranslationX() + jump;
             this.sprite.setTranslationX(newX);
         }
+//        checkWater();
     }
 
     public void moveLeft(float jump) {
@@ -43,10 +47,31 @@ public class Sprite {
             float newX = this.sprite.getTranslationX() - jump;
             this.sprite.setTranslationX(newX);
         }
+//        checkWater();
     }
 
     public boolean movedUp(float oldCoord, float newCoord) {
         return oldCoord != newCoord;
+    }
+
+    public void checkWater() {
+        float x = this.sprite.getTranslationX();
+        float y = this.sprite.getTranslationY();
+        if (y == -300 || y == -1050 || y == -1200) {
+            if (x != 0) {
+                resetToStart();
+
+            }
+        } else if (y == -1500) {
+            if (x == -300 || x == 300 || x == 450) {
+                resetToStart();
+            }
+        }
+    }
+
+    public void resetToStart() {
+        this.sprite.setTranslationX(0);
+        this.sprite.setTranslationY(0);
     }
 
     public int setLives(String level) {

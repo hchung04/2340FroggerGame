@@ -28,6 +28,10 @@ public class Score {
         return score;
     }
 
+    public void subtractScore() {
+        score--;
+    }
+
     public int getScore() {
         return score;
     }
