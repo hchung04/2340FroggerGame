@@ -45,7 +45,7 @@ public class GameOverActivity extends AppCompatActivity {
         if (scoreNum > highScoreNum) {
             highScoreText.setText("High Score: " + highScore);
 
-            //Save
+            //Save High Score
             SharedPreferences.Editor editor = settings.edit();
             editor.putInt("HIGH_SCORE", scoreNum);
             editor.commit();
