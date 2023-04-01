@@ -32,9 +32,18 @@ public class MovingObject {
     }
 
     public boolean checkCollision(Sprite sprite) {
-        boolean xEqual = sprite.getTranslationX() == this.movingObject.getTranslationX();
-        boolean yEqual = sprite.getTranslationY() == this.movingObject.getTranslationY();
+        boolean xEqual = sprite.getX() == this.movingObject.getX();
+        boolean yEqual = sprite.getY() == this.movingObject.getY();
         return xEqual && yEqual;
+    }
+
+    public float[] newCoordForCollision() {
+        float[] newCoord = new float[2];
+        if (this instanceof Vehicle) {
+            newCoord[0] = 0;
+            newCoord[1] = 0;
+        } // else if Log, newCoord = coord of Log [implement later]
+        return newCoord;
     }
 
 }
