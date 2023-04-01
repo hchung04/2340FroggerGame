@@ -25,9 +25,15 @@ public class GameActivity extends AppCompatActivity {
     private TextView name;
     private TextView level;
 
-    private MovingObject collidedObject;
+    private ImageView carLeft;
+    private ImageView truckLeft;
 
-    private static int highScore;
+    private int livesRemaining;
+
+    //position
+    private float carRightX;
+    private float carLeftX;
+    private float truckLeftX;
 
     //Initialize Class
     private Handler handler = new Handler(Looper.myLooper());
@@ -146,21 +152,6 @@ public class GameActivity extends AppCompatActivity {
                         carRight.updateX("right", 20);
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
-
-                        if (carRight.checkCollision(sprite)) {
-                            collidedObject = carRight;
-                        } else if (carLeft.checkCollision(sprite)) {
-                            collidedObject = carLeft;
-                        } else if (truckLeft.checkCollision(sprite)) {
-                            collidedObject = truckLeft;
-                        }
-
-                        if (sprite.getLivesRemaining() > 0) {
-                            sprite.dealWithCollision(collidedObject);
-                            livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                        } else {
-                            switchToGameOverActivity(score.getScore(), highScore);
-                        }
                     }
                 });
             }

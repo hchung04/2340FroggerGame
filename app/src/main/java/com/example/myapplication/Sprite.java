@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-
 public class Sprite {
 
     private ImageView sprite;
@@ -61,31 +59,8 @@ public class Sprite {
         }
     }
 
-    public void dealWithCollision(MovingObject collidedObject) {
-        float[] newCoord = collidedObject.newCoordForCollision();
-        setCoord(newCoord);
-        decreaseLives();
-    }
-
-    public void setCoord(float[] newCoord) {
-        sprite.setTranslationX(newCoord[0]);
-        sprite.setTranslationX(newCoord[1]);
-    }
-
-    public void decreaseLives() {
-        livesRemaining--;
-    }
-
     public int getLivesRemaining() {
         return this.livesRemaining;
-    }
-
-    public float getX() {
-        return this.sprite.getX();
-    }
-
-    public float getY() {
-        return this.sprite.getY();
     }
 
     public float getTranslationX() {
