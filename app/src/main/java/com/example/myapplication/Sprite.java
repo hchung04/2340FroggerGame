@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.graphics.Bitmap;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -59,12 +61,22 @@ public class Sprite {
         float y = this.sprite.getTranslationY();
         if (y == -300 || y == -1050 || y == -1200) {
             if (x != 0) {
-                resetToStart();
+                new CountDownTimer(100, 100) {
+                    public void onFinish() {
+                        resetToStart();
+                    }
+                    public void onTick(long millisUntilFinished) {}
+                }.start();
 
             }
         } else if (y == -1500) {
             if (x == -300 || x == 300 || x == 450) {
-                resetToStart();
+                new CountDownTimer(100, 100) {
+                    public void onFinish() {
+                        resetToStart();
+                    }
+                    public void onTick(long millisUntilFinished) {}
+                }.start();
             }
         }
     }
