@@ -31,14 +31,14 @@ public class Sprite {
     }
 
     public void moveRight(float jump) {
-        if (this.sprite.getTranslationX() + jump <= 411) {
+        if (this.sprite.getTranslationX() + jump <= 493) {
             float newX = this.sprite.getTranslationX() + jump;
             this.sprite.setTranslationX(newX);
         }
     }
 
     public void moveLeft(float jump) {
-        if (this.sprite.getTranslationX() - jump >= -411) {
+        if (this.sprite.getTranslationX() - jump >= -466) {
             float newX = this.sprite.getTranslationX() - jump;
             this.sprite.setTranslationX(newX);
         }
@@ -51,12 +51,14 @@ public class Sprite {
     public boolean checkWater() {
         float x = this.sprite.getTranslationX();
         float y = this.sprite.getTranslationY();
-        if (y == -300 || y == -1050 || y == -1200) {
-            if (x != 0) {
+        System.out.println(x);
+        System.out.println(y);
+        if (y == -274 || y == -959 || y == -1096) {
+            if (x != -55) {
                 return true;
             }
-        } else if (y == -1500) {
-            if (x == -300 || x == 300 || x == 450) {
+        } else if (y == -1370) {
+            if (x == -329 || x == 219 || x == 493) {
                 return true;
             }
         }
@@ -75,7 +77,7 @@ public class Sprite {
     }
 
     public void setToZero() {
-        this.sprite.setTranslationX(0);
+        this.sprite.setTranslationX(-55);
         this.sprite.setTranslationY(0);
     }
 
