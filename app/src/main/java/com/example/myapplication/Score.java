@@ -8,7 +8,7 @@ public class Score {
 
     public Score() {
         maxDistance = 0; //fill w/ starting y coord
-        score = 0;
+        this.score = 0;
     }
 
     public int updateScore(float yCoord) {
@@ -16,23 +16,24 @@ public class Score {
             maxDistance = yCoord;
             int row = -1 * (int) (yCoord / TILE);
             if (row == 1) { //modify these row values depending on where cars go
-                score += 2;
+                this.score += 2;
             } else if (row == 2) {
-                score += 3;
+                this.score += 3;
             } else if (row == 3) {
-                score += 4;
+                this.score += 4;
             } else {
-                score++;
+                this.score++;
             }
         }
-        return score;
+        return this.score;
     }
 
-    public void subtractScore() {
-        score--;
+    public int subtractScore() {
+        this.score /= 2;
+        return this.score;
     }
 
     public int getScore() {
-        return score;
+        return this.score;
     }
 }

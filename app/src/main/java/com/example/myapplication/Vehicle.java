@@ -4,10 +4,11 @@ import android.widget.ImageView;
 
 public class Vehicle extends MovingObject {
 
-    ImageView vehicle;
-    static ImageView vehicle2;
+    private ImageView vehicle;
+    private static ImageView vehicle2;
 
-    public Vehicle(ImageView vehicle, float startingX, float startingY, float scaleX, float scaleY) {
+    public Vehicle(ImageView vehicle, float startingX, float startingY,
+                   float scaleX, float scaleY) {
         super(vehicle, startingX, startingY, scaleX, scaleY);
 
     }
