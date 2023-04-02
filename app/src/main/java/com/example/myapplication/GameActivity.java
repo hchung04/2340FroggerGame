@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -25,9 +23,15 @@ public class GameActivity extends AppCompatActivity {
     private TextView name;
     private TextView level;
 
-    private MovingObject collidedObject;
+    private ImageView carLeft;
+    private ImageView truckLeft;
 
-    private static int highScore;
+    private int livesRemaining;
+
+    //position
+    private float carRightX;
+    private float carLeftX;
+    private float truckLeftX;
 
     //Initialize Class
     private Handler handler = new Handler(Looper.myLooper());
@@ -45,16 +49,13 @@ public class GameActivity extends AppCompatActivity {
         level = findViewById(R.id.level);
 
         Score score = new Score();
-
         //VEHICLES, sets starting position and scale
         Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -620, 15, 15);
         Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -900, 15, 15);
         Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -770, 15, 15);
-
         //NOTE: need to change these so that we don't concatenate with setText
         //Use getString and set format in strings.xml instead
         pointsCounter.setText("Points: " + score.getScore());
-
         //width and height of tiles and sprite
         int width = (int) getResources().getDimension(R.dimen.tile_width);
         int height = (int) getResources().getDimension(R.dimen.tile_height);
@@ -91,7 +92,11 @@ public class GameActivity extends AppCompatActivity {
                 if (i == 6 || i == 5 || i == 4) {
                     tileType = R.drawable.road_tile;
                 } else if (i % 2 == 0 || i == 3) {
-                    tileType = R.drawable.water;
+                    if (j == 3) {
+                        tileType = R.drawable.grass__0;
+                    } else {
+                        tileType = R.drawable.water;
+                    }
                 } else {
                     tileType = R.drawable.grass__0;
                 }
@@ -105,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+
         int jump = (int) getResources().getDimension(R.dimen.tile_width);
         ImageView upButton = (ImageView) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +120,12 @@ public class GameActivity extends AppCompatActivity {
                 if (sprite.movedUp(oldTranslation, sprite.getTranslationY())) {
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
                 }
+                if (sprite.checkWater()) {
+                    pointsCounter.setText("Points: " + score.subtractScore());
+                    sprite.resetToStart();
+                    sprite.subtractLife();
+                    livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                }
             }
         });
 
@@ -121,6 +133,12 @@ public class GameActivity extends AppCompatActivity {
         downButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveDown(jump);
+                if (sprite.checkWater()) {
+                    pointsCounter.setText("Points: " + score.subtractScore());
+                    sprite.resetToStart();
+                    sprite.subtractLife();
+                    livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                }
             }
         });
 
@@ -128,6 +146,12 @@ public class GameActivity extends AppCompatActivity {
         leftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveLeft(jump);
+                if (sprite.checkWater()) {
+                    pointsCounter.setText("Points: " + score.subtractScore());
+                    sprite.resetToStart();
+                    sprite.subtractLife();
+                    livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                }
             }
         });
 
@@ -135,6 +159,12 @@ public class GameActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveRight(jump);
+                if (sprite.checkWater()) {
+                    pointsCounter.setText("Points: " + score.subtractScore());
+                    sprite.resetToStart();
+                    sprite.subtractLife();
+                    livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                }
             }
         });
         timer.schedule(new TimerTask() {
@@ -146,21 +176,6 @@ public class GameActivity extends AppCompatActivity {
                         carRight.updateX("right", 20);
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
-
-                        if (carRight.checkCollision(sprite)) {
-                            collidedObject = carRight;
-                        } else if (carLeft.checkCollision(sprite)) {
-                            collidedObject = carLeft;
-                        } else if (truckLeft.checkCollision(sprite)) {
-                            collidedObject = truckLeft;
-                        }
-
-                        if (sprite.getLivesRemaining() > 0) {
-                            sprite.dealWithCollision(collidedObject);
-                            livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                        } else {
-                            switchToGameOverActivity(score.getScore(), highScore);
-                        }
                     }
                 });
             }
@@ -168,7 +183,6 @@ public class GameActivity extends AppCompatActivity {
     }
     private void switchToGameOverActivity(int points, int highScore) {
         Intent switchActivityIntent = new Intent(this, GameOverActivity.class);
-
         switchActivityIntent.putExtra("points", points + "");
         switchActivityIntent.putExtra("high_score", highScore + "");
         this.finish();

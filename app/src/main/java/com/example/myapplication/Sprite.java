@@ -1,21 +1,19 @@
 package com.example.myapplication;
 
 import android.graphics.Bitmap;
-import android.view.View;
+import android.os.CountDownTimer;
 import android.widget.ImageView;
-
-import java.util.ArrayList;
 
 public class Sprite {
 
     private ImageView sprite;
     private int livesRemaining;
 
+
     public Sprite(ImageView sprite, Bitmap spriteImage, String level) {
         this.sprite = sprite;
         this.sprite.setImageBitmap(spriteImage);
         this.livesRemaining = setLives(level);
-
     }
 
     public void moveUp(float jump) {
@@ -23,7 +21,6 @@ public class Sprite {
             float newY = this.sprite.getTranslationY() - jump;
             this.sprite.setTranslationY(newY);
         }
-
     }
 
     public void moveDown(float jump) {
@@ -51,6 +48,37 @@ public class Sprite {
         return oldCoord != newCoord;
     }
 
+    public boolean checkWater() {
+        float x = this.sprite.getTranslationX();
+        float y = this.sprite.getTranslationY();
+        if (y == -300 || y == -1050 || y == -1200) {
+            if (x != 0) {
+                return true;
+            }
+        } else if (y == -1500) {
+            if (x == -300 || x == 300 || x == 450) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void resetToStart() {
+        new CountDownTimer(100, 100) {
+            public void onFinish() {
+                setToZero();
+            }
+            public void onTick(long millisUntilFinished) {
+
+            }
+        }.start();
+    }
+
+    public void setToZero() {
+        this.sprite.setTranslationX(0);
+        this.sprite.setTranslationY(0);
+    }
+
     public int setLives(String level) {
         if (level.equals("Easy")) {
             return 3;
@@ -61,31 +89,16 @@ public class Sprite {
         }
     }
 
-    public void dealWithCollision(MovingObject collidedObject) {
-        float[] newCoord = collidedObject.newCoordForCollision();
-        setCoord(newCoord);
-        decreaseLives();
+    public void subtractLife() {
+        this.livesRemaining -= 1;
     }
 
-    public void setCoord(float[] newCoord) {
-        sprite.setTranslationX(newCoord[0]);
-        sprite.setTranslationX(newCoord[1]);
-    }
-
-    public void decreaseLives() {
-        livesRemaining--;
+    public boolean hasNoLives() {
+        return this.livesRemaining == 0;
     }
 
     public int getLivesRemaining() {
         return this.livesRemaining;
-    }
-
-    public float getX() {
-        return this.sprite.getX();
-    }
-
-    public float getY() {
-        return this.sprite.getY();
     }
 
     public float getTranslationX() {
@@ -103,4 +116,5 @@ public class Sprite {
     public void setTranslationY(float y) {
         this.sprite.setTranslationY(y);
     }
+
 }
