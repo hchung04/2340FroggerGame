@@ -17,5 +17,14 @@ public class SprintFourTestCases {
         assert(score.subtractScore() == 1);
     }
 
+    @Test
+    public void checkWaterTiles() {
+        assert (Sprite.checkWater(82, -274));
+        assert (Sprite.checkWater(219, -959));
+        assert (Sprite.checkWater(493, -1096));
+        assert (Sprite.checkWater(-329, -1370));
+        assert (Sprite.checkWater(219, -1370));
+        assert (Sprite.checkWater(493, -1370));
+    }
 
 }

@@ -13,7 +13,7 @@ public class Vehicle extends MovingObject {
 
     }
 
-  //method used for test cases
+//  method used for test cases
 //    public static float updateX2(float translationX, String direction, int additionalToX) {
 //        float vehicleX = translationX + additionalToX;
 //        if (direction.equals("left")) {
@@ -31,6 +31,7 @@ public class Vehicle extends MovingObject {
 //        }
 //        return vehicleX;
 //    }
+
 
 
 

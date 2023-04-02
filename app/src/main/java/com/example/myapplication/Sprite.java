@@ -142,4 +142,18 @@ public class Sprite {
         this.sprite.setTranslationY(y);
     }
 
+    //static method for Sprint 4 test case
+    public static boolean checkWater(float x, float y) {
+        if (y == -274 || y == -959 || y == -1096) {
+            if (x != -55) {
+                return true;
+            }
+        } else if (y == -1370) {
+            if (x == -329 || x == 219 || x == 493) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
