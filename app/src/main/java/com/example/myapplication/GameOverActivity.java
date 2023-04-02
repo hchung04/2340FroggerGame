@@ -27,29 +27,29 @@ public class GameOverActivity extends AppCompatActivity {
 
         scoreText = (TextView) findViewById(R.id.gameover_score);
         highScoreText = (TextView) findViewById(R.id.gameover_highscore);
-        String score = retrieveConfigurationData.getStringExtra("points");
-        String highScore = retrieveConfigurationData.getStringExtra("high_score");
-        scoreText.setText("Points: " + score);
-        highScoreText.setText("High Score: " + highScore);
+        int score = retrieveConfigurationData.getIntExtra("points", 0);
 
-        Intent intent = new Intent(getApplicationContext(), GameOverActivity.class);
-        intent.putExtra("score", score);
-        startActivity(intent);
+        //int highScore = retrieveConfigurationData.getIntExtra("high_score", 0);
 
-        int scoreNum = getIntent().getIntExtra("score", 0);
-        scoreText.setText(scoreNum + "");
+        //Intent intent = new Intent(getApplicationContext(), GameOverActivity.class);
+        //intent.putExtra("score", score);
+        //startActivity(intent);
+
+        //int scoreNum = getIntent().getIntExtra("score", 0);
+        //scoreText.setText(scoreNum + "");
 
         SharedPreferences settings = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
-        int highScoreNum = settings.getInt("HIGH_SCORE", 0);
+        SharedPreferences.Editor editor = settings.edit();
 
-        highScoreText.setText("High Score: " + highScore);
-        if (scoreNum > highScoreNum) {
+        int highScore = settings.getInt("HIGH_SCORE", 0);
 
-            //Save High Score
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("HIGH_SCORE", scoreNum);
-            editor.commit();
+        if (score > highScore) {
+            saveNewHighScore(score, editor);
+            highScore = score;
         }
+
+        scoreText.setText("Points: " + score);
+        highScoreText.setText("High Score: " + highScore);
 
         restartButton = (ImageButton) findViewById(R.id.restart_button);
         restartButton.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +61,7 @@ public class GameOverActivity extends AppCompatActivity {
         exitButton = (Button) findViewById(R.id.exit_button);
         exitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                saveNewHighScore(0, editor);
                 GameOverActivity.this.finish();
                 finishAffinity(); //exits app
             }
@@ -68,8 +69,14 @@ public class GameOverActivity extends AppCompatActivity {
 
     }
 
+    private void saveNewHighScore(int score, SharedPreferences.Editor editor) {
+        editor.putInt("HIGH_SCORE", score);
+        editor.commit();
+    }
+
     private void switchToConfigurationActivity() {
         Intent switchActivityIntent = new Intent(this, ConfigurationActivity.class);
+        this.finish();
         startActivity(switchActivityIntent);
     }
 }

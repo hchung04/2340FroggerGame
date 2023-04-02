@@ -33,6 +33,10 @@ public class Score {
         return this.score;
     }
 
+    public void resetMaxDistance() {
+        maxDistance = 0;
+    }
+
     public int getScore() {
         return this.score;
     }

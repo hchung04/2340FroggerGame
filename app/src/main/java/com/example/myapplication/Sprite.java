@@ -89,8 +89,23 @@ public class Sprite {
         }
     }
 
+    public void dealWithCollision(MovingObject collidedObject) {
+        float[] newCoord = collidedObject.newCoordForCollision();
+        setCoord(newCoord);
+        subtractLife();
+    }
+
+    public void setCoord(float[] newCoord) {
+        sprite.setTranslationX(newCoord[0]);
+        sprite.setTranslationY(newCoord[1]);
+    }
+
     public void subtractLife() {
         this.livesRemaining -= 1;
+    }
+
+    public void resetLife() {
+        this.livesRemaining++;
     }
 
     public boolean hasNoLives() {
@@ -99,6 +114,14 @@ public class Sprite {
 
     public int getLivesRemaining() {
         return this.livesRemaining;
+    }
+
+    public float getX() {
+        return this.sprite.getX();
+    }
+
+    public float getY() {
+        return this.sprite.getY();
     }
 
     public float getTranslationX() {
