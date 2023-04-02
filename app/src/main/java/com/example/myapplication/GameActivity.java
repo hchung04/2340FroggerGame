@@ -23,15 +23,10 @@ public class GameActivity extends AppCompatActivity {
     private TextView name;
     private TextView level;
 
-    private ImageView carLeft;
-    private ImageView truckLeft;
+    private MovingObject collidedObject;
+    private boolean collided;
 
     private int livesRemaining;
-
-    //position
-    private float carRightX;
-    private float carLeftX;
-    private float truckLeftX;
 
     //Initialize Class
     private Handler handler = new Handler(Looper.myLooper());
@@ -176,15 +171,39 @@ public class GameActivity extends AppCompatActivity {
                         carRight.updateX("right", 20);
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
+
+                        if (carRight.checkCollision(sprite, 65)) {
+                            collidedObject = carRight;
+                            collided = true;
+                        } else if (carLeft.checkCollision(sprite, 65)) {
+                             collidedObject = carLeft;
+                             collided = true;
+                        } else if (truckLeft.checkCollision(sprite, 65)) {
+                             collidedObject = truckLeft;
+                             collided = true;
+                        }
+
+                        if (collided) {
+                            if (sprite.getLivesRemaining() > 0) {
+                                sprite.dealWithCollision(collidedObject);
+                                score.resetMaxDistance();
+                                livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                                pointsCounter.setText("Points: " + score.subtractScore());
+                            } else {
+                                sprite.resetLife();
+                                switchToGameOverActivity(score.getScore());
+                            }
+                            collided = false;
+                        }
                     }
                 });
             }
         }, 0, 100);
     }
-    private void switchToGameOverActivity(int points, int highScore) {
+    private void switchToGameOverActivity(int points) {
         Intent switchActivityIntent = new Intent(this, GameOverActivity.class);
-        switchActivityIntent.putExtra("points", points + "");
-        switchActivityIntent.putExtra("high_score", highScore + "");
+        switchActivityIntent.putExtra("points", points);
+        //switchActivityIntent.putExtra("high_score", highScore);
         this.finish();
         startActivity(switchActivityIntent);
     }
