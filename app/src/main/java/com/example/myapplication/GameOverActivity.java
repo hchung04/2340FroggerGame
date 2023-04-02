@@ -42,15 +42,13 @@ public class GameOverActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
         int highScoreNum = settings.getInt("HIGH_SCORE", 0);
 
+        highScoreText.setText("High Score: " + highScore);
         if (scoreNum > highScoreNum) {
-            highScoreText.setText("High Score: " + highScore);
 
             //Save High Score
             SharedPreferences.Editor editor = settings.edit();
             editor.putInt("HIGH_SCORE", scoreNum);
             editor.commit();
-        } else {
-            highScoreText.setText("High Score: " + highScore);
         }
 
         restartButton = (ImageButton) findViewById(R.id.restart_button);
