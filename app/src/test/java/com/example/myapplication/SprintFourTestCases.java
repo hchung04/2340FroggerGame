@@ -27,4 +27,13 @@ public class SprintFourTestCases {
         assert (Sprite.checkWater(493, -1370));
     }
 
+    @Test
+    public void checkHighScore() {
+        int score = 10;
+        int highScore = 0;
+        assert(GameOverActivity.saveNewHighScore(score, highScore) == 10);
+    }
+
+
+
 }
