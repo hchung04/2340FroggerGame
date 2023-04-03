@@ -34,6 +34,16 @@ public class SprintFourTestCases {
         assert(GameOverActivity.saveNewHighScore(score, highScore) == 10);
     }
 
+    @Test
+    public void respawnedAtStart() {
+        float[] newPosition = Sprite.dealWithCollision();
+        float newX = newPosition[0];
+        float newY = newPosition[1];
+        assert(newX == 0);
+        assert(newY == 0);
+    }
+
+
 
 
 }
