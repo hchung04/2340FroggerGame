@@ -79,4 +79,12 @@ public class GameOverActivity extends AppCompatActivity {
         this.finish();
         startActivity(switchActivityIntent);
     }
+
+    //static method for Sprint 4 Test Case
+    public static int saveNewHighScore(int score, int highScore) {
+        if (score > highScore) {
+            return score;
+        }
+        return highScore;
+    }
 }
