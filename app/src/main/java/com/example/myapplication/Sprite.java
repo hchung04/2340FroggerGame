@@ -142,7 +142,7 @@ public class Sprite {
         this.sprite.setTranslationY(y);
     }
 
-    //static method for Sprint 4 test case
+    //static method for Sprint 4 water collision test case
     public static boolean checkWater(float x, float y) {
         if (y == -274 || y == -959 || y == -1096) {
             if (x != -55) {
@@ -155,5 +155,17 @@ public class Sprite {
         }
         return false;
     }
+
+    // static method for Sprint 4 respawning test case
+    public static float[] dealWithCollision() {
+        float spritePosX = 0;
+        float spritePosY = 0;
+        float[] newPosition = new float[2];
+        newPosition[0] = spritePosX;
+        newPosition[1] = spritePosY;
+
+        return newPosition;
+    }
+
 
 }
