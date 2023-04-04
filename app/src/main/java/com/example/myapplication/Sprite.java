@@ -16,6 +16,10 @@ public class Sprite {
         this.livesRemaining = setLives(level);
     }
 
+    public Sprite(int livesRemaining) {
+        this.livesRemaining = livesRemaining;
+    }
+
     public void moveUp(float jump) {
         if (this.sprite.getTranslationY() - jump >= -10 * jump || sprite.getTranslationY() == 0) {
             float newY = this.sprite.getTranslationY() - jump;
@@ -165,6 +169,12 @@ public class Sprite {
         newPosition[1] = spritePosY;
 
         return newPosition;
+    }
+
+    // method for Sprint 4 collision life test cases
+    public int subtractLife(int livesRemaining) {
+        livesRemaining--;
+        return livesRemaining;
     }
 
 

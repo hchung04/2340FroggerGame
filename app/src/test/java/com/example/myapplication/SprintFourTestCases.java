@@ -8,12 +8,12 @@ import org.junit.Test;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class SprintFourTestCases {
-    private final float JUMP = 50;
-    private final float exampleInitialY = -300;
+    private final float JUMP = -137;
+
     @Test
     public void scoreAfterCollision() {
         Score score = new Score();
-        score.updateScore(-137); //score = 2
+        score.updateScore(JUMP); //score = 2
         assert(score.subtractScore() == 1);
     }
 
@@ -43,7 +43,62 @@ public class SprintFourTestCases {
         assert(newY == 0);
     }
 
+    @Test
+    public void waterCollisionLife(){
+        int livesRemaining = 2;
+        Sprite sprite = new Sprite(livesRemaining);
+        Score score = new Score();
+        score.updateScore(2 * JUMP); // move up 2 rows
+        assert(sprite.subtractLife(sprite.getLivesRemaining()) == 1);
+    }
 
+    @Test
+    public void vehicleCollisionLife(){
+        int livesRemaining = 2;
+        Sprite sprite = new Sprite(livesRemaining);
+        Score score = new Score();
+        score.updateScore(4 * JUMP); // vehicles on 4th, 5th, and 6th rows
+        score.updateScore(5 * JUMP);
+        score.updateScore(6 * JUMP);
+        assert(sprite.subtractLife(sprite.getLivesRemaining()) == 1);
+    }
+
+    @Test
+    public void scoreRespawn(){
+        Score score = new Score();
+        score.updateScore(JUMP); //score = 2
+        float[] newPosition = Sprite.dealWithCollision();
+        float newX = newPosition[0];
+        float newY = newPosition[1];
+        assert(newX == 0);
+        assert(newY == 0);
+        assert(score.subtractScore() == 1);
+    }
+
+    @Test
+    public void gameOverScreen(){
+        int livesRemaining = 1;
+        Sprite sprite = new Sprite(livesRemaining);
+        livesRemaining = sprite.subtractLife(livesRemaining); // lives = 0
+        assert(GameActivity.switchToGameOverScreen(livesRemaining) == true);
+    }
+
+    @Test
+    public void waterCollisionScore(){
+        Score score = new Score();
+        score.updateScore(JUMP);
+        score.updateScore(2 * JUMP); //score = 5
+        assert(score.subtractScore() == 2);
+    }
+
+    @Test
+    public void vehicleCollisionScore(){
+        Score score = new Score();
+        score.updateScore(4 * JUMP); // vehicles on 4th, 5th, and 6th rows
+        score.updateScore(5 * JUMP);
+        score.updateScore(6 * JUMP); // score = 3
+        assert(score.subtractScore() == 1);
+    }
 
 
 }

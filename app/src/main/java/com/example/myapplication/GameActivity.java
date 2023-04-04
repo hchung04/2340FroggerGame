@@ -74,7 +74,7 @@ public class GameActivity extends AppCompatActivity {
 
         //Outer loop sets up individual rows
         //Depending on row, changes tile type
-        //Total Rows: 11
+        //Total Rows: 10
         for (int i = 0; i < 10; i++) {
             LinearLayout row = new LinearLayout(this);
             gridLayout.addView(row);
@@ -226,6 +226,14 @@ public class GameActivity extends AppCompatActivity {
         //switchActivityIntent.putExtra("high_score", highScore);
         this.finish();
         startActivity(switchActivityIntent);
+    }
+
+    // method for Sprint 4 game over test case
+    public static boolean switchToGameOverScreen(int livesRemaining) {
+        if (livesRemaining == 0) {
+            return true;
+        }
+        return false;
     }
 
 }
