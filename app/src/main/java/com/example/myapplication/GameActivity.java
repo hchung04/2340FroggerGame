@@ -127,6 +127,15 @@ public class GameActivity extends AppCompatActivity {
                         switchToGameOverActivity(score.getScore());
                     }
                 }
+
+                if (sprite.checkGoal()) {
+                    if (sprite.getLivesRemaining() > 1) {
+                        pointsCounter.setText("Points: " + score.addGoalScore());
+                        sprite.resetToStart();
+                        livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                    }
+                }
+
                 if (sprite.movedUp(oldTranslation, sprite.getTranslationY())) {
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
                 }
