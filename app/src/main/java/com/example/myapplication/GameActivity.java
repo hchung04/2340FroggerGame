@@ -55,6 +55,10 @@ public class GameActivity extends AppCompatActivity {
         int width = (int) getResources().getDimension(R.dimen.tile_width);
         int height = (int) getResources().getDimension(R.dimen.tile_height);
 
+        //LOGS, sets starting position and scale
+        Log logSmall = new Log(findViewById(R.id.logSmall), -600, -620, 15, 15);
+        Log logBig = new Log(findViewById(R.id.logBig), -600, -620, 15, 15);
+
         Intent retrieveConfigurationData = getIntent();
 
         //set name and level to player's choice
@@ -191,6 +195,8 @@ public class GameActivity extends AppCompatActivity {
                         carRight.updateX("right", 20);
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
+                        logSmall.updateX("right", 40);
+                        logBig.updateX("right", 40);
 
                         if (carRight.checkCollision(sprite, 65)) {
                             collidedObject = carRight;
@@ -220,6 +226,8 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 0, 100);
     }
+
+
     private void switchToGameOverActivity(int points) {
         Intent switchActivityIntent = new Intent(this, GameOverActivity.class);
         switchActivityIntent.putExtra("points", points);
