@@ -66,5 +66,6 @@ dependencies {
     })
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
 
-
+    // confetti effect
+    implementation 'com.github.jinatonic.confetti:confetti:1.1.2'
 }
