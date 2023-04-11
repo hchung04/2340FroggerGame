@@ -221,7 +221,7 @@ public class GameActivity extends AppCompatActivity {
         }, 0, 100);
     }
     private void switchToGameOverActivity(int points) {
-        Intent switchActivityIntent = new Intent(this, GameOverActivity.class);
+        Intent switchActivityIntent = new Intent(this, GameWonActivity.class);
         switchActivityIntent.putExtra("points", points);
         //switchActivityIntent.putExtra("high_score", highScore);
         this.finish();
