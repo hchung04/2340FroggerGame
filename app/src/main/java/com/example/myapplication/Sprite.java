@@ -68,6 +68,16 @@ public class Sprite {
         }
         return false;
     }
+    public boolean checkGoal() {
+        float x = this.sprite.getTranslationX();
+        float y = this.sprite.getTranslationY();
+        if (y == -1370) {
+            if (x != -466 || x != -192 || x != 82 || x != 356) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void resetToStart() {
         new CountDownTimer(100, 100) {

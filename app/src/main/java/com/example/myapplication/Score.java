@@ -33,6 +33,11 @@ public class Score {
         return this.score;
     }
 
+    public int addGoalScore() {
+        this.score += 10;
+        return this.score;
+    }
+
     public void resetMaxDistance() {
         maxDistance = 0;
     }
