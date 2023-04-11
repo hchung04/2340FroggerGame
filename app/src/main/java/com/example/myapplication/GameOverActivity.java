@@ -22,6 +22,30 @@ public class GameOverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_over_screen);
+        onCreateBody();
+    }
+
+    protected void saveNewHighScore(int score, SharedPreferences.Editor editor) {
+        editor.putInt("HIGH_SCORE", score);
+        editor.commit();
+    }
+
+    protected void switchToConfigurationActivity() {
+        Intent switchActivityIntent = new Intent(this, ConfigurationActivity.class);
+        this.finish();
+        startActivity(switchActivityIntent);
+    }
+
+    //static method for Sprint 4 Test Case
+    public static int saveNewHighScore(int score, int highScore) {
+        if (score > highScore) {
+            return score;
+        }
+        return highScore;
+    }
+
+    protected void onCreateBody(){
+        setContentView(R.layout.game_over_screen);
 
         Intent retrieveConfigurationData = getIntent();
 
@@ -57,25 +81,5 @@ public class GameOverActivity extends AppCompatActivity {
                 finishAffinity(); //exits app
             }
         });
-
-    }
-
-    private void saveNewHighScore(int score, SharedPreferences.Editor editor) {
-        editor.putInt("HIGH_SCORE", score);
-        editor.commit();
-    }
-
-    private void switchToConfigurationActivity() {
-        Intent switchActivityIntent = new Intent(this, ConfigurationActivity.class);
-        this.finish();
-        startActivity(switchActivityIntent);
-    }
-
-    //static method for Sprint 4 Test Case
-    public static int saveNewHighScore(int score, int highScore) {
-        if (score > highScore) {
-            return score;
-        }
-        return highScore;
     }
 }

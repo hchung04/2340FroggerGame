@@ -127,13 +127,10 @@ public class GameActivity extends AppCompatActivity {
                         switchToGameOverActivity(score.getScore());
                     }
                 }
-
-                if (sprite.checkGoal()) {
-                    if (sprite.getLivesRemaining() > 1) {
-                        pointsCounter.setText("Points: " + score.addGoalScore());
-                        sprite.resetToStart();
-                        livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                    }
+                //game won
+                if (sprite.checkGoal() && sprite.getLivesRemaining() > 0) {
+                    pointsCounter.setText("Points: " + score.addGoalScore());
+                    switchToGameWonActivity(score.getScore());
                 }
 
                 if (sprite.movedUp(oldTranslation, sprite.getTranslationY())) {
@@ -238,9 +235,15 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void switchToGameOverActivity(int points) {
+        Intent switchActivityIntent = new Intent(this, GameOverActivity.class);
+        switchActivityIntent.putExtra("points", points);
+        this.finish();
+        startActivity(switchActivityIntent);
+    }
+
+    private void switchToGameWonActivity(int points) {
         Intent switchActivityIntent = new Intent(this, GameWonActivity.class);
         switchActivityIntent.putExtra("points", points);
-        //switchActivityIntent.putExtra("high_score", highScore);
         this.finish();
         startActivity(switchActivityIntent);
     }
