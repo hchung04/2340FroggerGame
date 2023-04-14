@@ -187,5 +187,13 @@ public class Sprite {
         return livesRemaining;
     }
 
+    //method for Sprint 5 test case
+    public static boolean hasEnoughLivesToWin(int livesRemaining) {
+        if (livesRemaining >= 1) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

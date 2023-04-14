@@ -12,8 +12,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.github.jinatonic.confetti.CommonConfetti;
-import com.github.jinatonic.confetti.ConfettiView;
+//import com.github.jinatonic.confetti.CommonConfetti;
+//import com.github.jinatonic.confetti.ConfettiView;
 
 public class GameWonActivity extends GameOverActivity {
 
@@ -67,4 +67,5 @@ public class GameWonActivity extends GameOverActivity {
             }
         });
     }
+
 }
