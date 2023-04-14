@@ -45,8 +45,6 @@ public class GameOverActivity extends AppCompatActivity {
     }
 
     protected void onCreateBody(){
-        setContentView(R.layout.game_over_screen);
-
         Intent retrieveConfigurationData = getIntent();
 
         scoreText = (TextView) findViewById(R.id.gameover_score);
