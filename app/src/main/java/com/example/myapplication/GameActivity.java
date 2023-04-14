@@ -116,17 +116,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 float oldTranslation = sprite.getTranslationY();
                 sprite.moveUp(jump);
-                if (sprite.checkWater()) {
-                    if (sprite.getLivesRemaining() > 1) {
-                        pointsCounter.setText("Points: " + score.subtractScore());
-                        sprite.resetToStart();
-                        sprite.subtractLife();
-                        livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                    } else {
-                        sprite.resetLife();
-                        switchToGameOverActivity(score.getScore());
-                    }
-                }
+                updateStats(sprite, score);
                 //game won
                 if (sprite.checkGoal() && sprite.getLivesRemaining() > 0) {
                     pointsCounter.setText("Points: " + score.addGoalScore());
@@ -143,17 +133,7 @@ public class GameActivity extends AppCompatActivity {
         downButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveDown(jump);
-                if (sprite.checkWater()) {
-                    if (sprite.getLivesRemaining() > 1) {
-                        pointsCounter.setText("Points: " + score.subtractScore());
-                        sprite.resetToStart();
-                        sprite.subtractLife();
-                        livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                    } else {
-                        sprite.resetLife();
-                        switchToGameOverActivity(score.getScore());
-                    }
-                }
+                updateStats(sprite, score);
             }
         });
 
@@ -161,17 +141,7 @@ public class GameActivity extends AppCompatActivity {
         leftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveLeft(jump);
-                if (sprite.checkWater()) {
-                    if (sprite.getLivesRemaining() > 1) {
-                        pointsCounter.setText("Points: " + score.subtractScore());
-                        sprite.resetToStart();
-                        sprite.subtractLife();
-                        livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                    } else {
-                        sprite.resetLife();
-                        switchToGameOverActivity(score.getScore());
-                    }
-                }
+                updateStats(sprite, score);
             }
         });
 
@@ -179,17 +149,7 @@ public class GameActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveRight(jump);
-                if (sprite.checkWater()) {
-                    if (sprite.getLivesRemaining() > 1) {
-                        pointsCounter.setText("Points: " + score.subtractScore());
-                        sprite.resetToStart();
-                        sprite.subtractLife();
-                        livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                    } else {
-                        sprite.resetLife();
-                        switchToGameOverActivity(score.getScore());
-                    }
-                }
+                updateStats(sprite, score);
             }
         });
         timer.schedule(new TimerTask() {
@@ -231,6 +191,20 @@ public class GameActivity extends AppCompatActivity {
                 });
             }
         }, 0, 100);
+    }
+
+    private void updateStats(Sprite sprite, Score score) {
+        if (sprite.checkWater()) {
+            if (sprite.getLivesRemaining() > 1) {
+                pointsCounter.setText("Points: " + score.subtractScore());
+                sprite.resetToStart();
+                sprite.subtractLife();
+                livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+            } else {
+                sprite.resetLife();
+                switchToGameOverActivity(score.getScore());
+            }
+        }
     }
 
 
