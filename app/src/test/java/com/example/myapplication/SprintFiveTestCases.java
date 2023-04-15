@@ -14,4 +14,18 @@ public class SprintFiveTestCases {
         assert (!Sprite.hasEnoughLivesToWin(0));
     }
 
+    //Checks if log moves left properly
+    @Test
+    public void logMovesLeft() {
+        Log log = new Log(600, 0);
+        assert(log.updateX('L', 30) == 570);
+    }
+
+    //Checks if log will respawn on the right side of the screen after going off screen to the left
+    @Test
+    public void logMovesOffScreenLeft() {
+        Log log = new Log(-600, 0);
+        assert(log.updateX('L', 30) == 600);
+    }
+
 }

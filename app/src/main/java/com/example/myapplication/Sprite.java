@@ -55,8 +55,6 @@ public class Sprite {
     public boolean checkWater() {
         float x = this.sprite.getTranslationX();
         float y = this.sprite.getTranslationY();
-        System.out.println(x);
-        System.out.println(y);
         if (y == -274 || y == -959 || y == -1096) {
             if (x != -55) {
                 return true;

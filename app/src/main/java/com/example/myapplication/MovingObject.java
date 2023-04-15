@@ -5,6 +5,7 @@ import android.widget.ImageView;
 public class MovingObject {
 
     ImageView movingObject;
+    private float xCoord, yCoord;
 
     public MovingObject(ImageView movingObject, float startingX, float startingY, float scaleX, float scaleY) {
         this.movingObject = movingObject;
@@ -12,6 +13,30 @@ public class MovingObject {
         this.movingObject.setTranslationY(startingY);
         this.movingObject.setScaleX(scaleX);
         this.movingObject.setScaleY(scaleY);
+    }
+
+    //for testing purposes
+    public MovingObject(float startingX, float startingY) {
+        xCoord = startingX;
+        yCoord = startingY;
+    }
+
+    //for testing purposes
+    public double updateX(char direction, int additionalToX) {
+        if (direction == 'L') {
+            if (xCoord - additionalToX < -600) {
+                xCoord = 600;
+            } else {
+                xCoord = xCoord - additionalToX;
+            }
+        } else if (direction == 'R') {
+            if (xCoord + additionalToX> 600) {
+                xCoord = -600;
+            } else {
+                xCoord = xCoord + additionalToX;
+            }
+        }
+        return xCoord;
     }
 
     public void updateX(String direction, int additionalToX) {
@@ -34,8 +59,6 @@ public class MovingObject {
     public boolean checkCollision(Sprite sprite, int offset) {
         boolean xEqual = Math.abs(sprite.getX() - this.movingObject.getX()) <= offset;
         boolean yEqual = Math.abs(sprite.getY() - this.movingObject.getY()) <= offset;
-        System.out.println(sprite.getY());
-        System.out.println(movingObject.getY());
         return xEqual && yEqual;
     }
 

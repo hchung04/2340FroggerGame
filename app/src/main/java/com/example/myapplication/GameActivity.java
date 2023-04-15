@@ -26,8 +26,6 @@ public class GameActivity extends AppCompatActivity {
     private MovingObject collidedObject;
     private boolean collided;
 
-    private int livesRemaining;
-
     //Initialize Class
     private Handler handler = new Handler(Looper.myLooper());
     private Timer timer = new Timer();
