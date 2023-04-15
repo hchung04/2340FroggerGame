@@ -34,17 +34,20 @@ public class MovingObject {
     public boolean checkCollision(Sprite sprite, int offset) {
         boolean xEqual = Math.abs(sprite.getX() - this.movingObject.getX()) <= offset;
         boolean yEqual = Math.abs(sprite.getY() - this.movingObject.getY()) <= offset;
-//        System.out.println(sprite.getY());
-//        System.out.println(movingObject.getY());
+        System.out.println(sprite.getY());
+        System.out.println(movingObject.getY());
         return xEqual && yEqual;
     }
 
-    public float[] newCoordForCollision() {
+    public float[] newCoordForCollision(Sprite sprite) {
         float[] newCoord = new float[2];
         if (this instanceof Vehicle) {
             newCoord[0] = -55;
             newCoord[1] = 0;
-        } // else if Log, newCoord = coord of Log [implement later]
+        } else if (this instanceof Log) {
+            newCoord[0] = this.movingObject.getTranslationX();
+            newCoord[1] = sprite.getTranslationY();
+        }
         return newCoord;
     }
 

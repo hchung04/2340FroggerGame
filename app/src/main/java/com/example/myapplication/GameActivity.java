@@ -56,8 +56,9 @@ public class GameActivity extends AppCompatActivity {
         int height = (int) getResources().getDimension(R.dimen.tile_height);
 
         //LOGS, sets starting position and scale
-        Log logSmall = new Log(findViewById(R.id.logSmall), -600, -620, 15, 15);
-        Log logBig = new Log(findViewById(R.id.logBig), -600, -620, 15, 15);
+        Log logSmall = new Log(findViewById(R.id.logSmall), -600, -1180, 15, 15);
+        Log logBigR = new Log(findViewById(R.id.logBigR), -600, -1050, 15, 15);
+        Log logBigL = new Log(findViewById(R.id.logBigL), -600, -370, 15, 15);
 
         Intent retrieveConfigurationData = getIntent();
 
@@ -161,8 +162,9 @@ public class GameActivity extends AppCompatActivity {
                         carRight.updateX("right", 20);
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
-                        logSmall.updateX("right", 40);
-                        logBig.updateX("right", 40);
+                        logSmall.updateX("right", 10);
+                        logBigR.updateX("right", 40);
+                        logBigL.updateX("left", -20);
 
                         if (carRight.checkCollision(sprite, 65)) {
                             collidedObject = carRight;
@@ -173,6 +175,15 @@ public class GameActivity extends AppCompatActivity {
                         } else if (truckLeft.checkCollision(sprite, 65)) {
                              collidedObject = truckLeft;
                              collided = true;
+                        } else if (logSmall.checkCollision(sprite, 200)) {
+                            collidedObject = logSmall;
+                            collided = true;
+                        } else if (logBigR.checkCollision(sprite, 200)) {
+                            collidedObject = logBigR;
+                            collided = true;
+                        } else if (logBigL.checkCollision(sprite, 200)) {
+                            collidedObject = logBigL;
+                            collided = true;
                         }
 
                         if (collided) {

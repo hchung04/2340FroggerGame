@@ -106,9 +106,11 @@ public class Sprite {
     }
 
     public void dealWithCollision(MovingObject collidedObject) {
-        float[] newCoord = collidedObject.newCoordForCollision();
+        float[] newCoord = collidedObject.newCoordForCollision(this);
         setCoord(newCoord);
-        subtractLife();
+        if (collidedObject instanceof Vehicle) {
+            subtractLife();
+        }
     }
 
     public void setCoord(float[] newCoord) {
