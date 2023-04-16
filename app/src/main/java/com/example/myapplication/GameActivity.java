@@ -238,5 +238,13 @@ public class GameActivity extends AppCompatActivity {
         }
         return false;
     }
+    //method for Sprint 5 game won test case
+    public static boolean switchToGameWonScreen(int livesRemaining) {
+        if (livesRemaining >= 1) {
+            return true;
+        }
+        return false;
+    }
+
 
 }
