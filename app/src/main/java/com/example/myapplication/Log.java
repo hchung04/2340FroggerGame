@@ -4,8 +4,6 @@ import android.widget.ImageView;
 
 public class Log extends MovingObject {
 
-    ImageView log;
-
     public Log (ImageView log, float startingX, float startingY, float scaleX, float scaleY) {
         super(log, startingX, startingY, scaleX, scaleY);
     }
