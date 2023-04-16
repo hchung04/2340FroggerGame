@@ -72,7 +72,7 @@ public class Sprite {
         System.out.println(x);
         System.out.println(y);
         if (y == -1370) {
-            if (x != -466 || x != -192 || x != 82 || x != 356) {
+            if (x == -466 || x == -192 || x == 82 || x == 356) {
                 return true;
             }
         }

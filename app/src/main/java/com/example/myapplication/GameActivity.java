@@ -173,13 +173,13 @@ public class GameActivity extends AppCompatActivity {
                         } else if (truckLeft.checkCollision(sprite, 65)) {
                              collidedObject = truckLeft;
                              collided = true;
-                        } else if (logSmall.checkCollision(sprite, 200)) {
+                        } else if (logSmall.checkCollision(sprite, 40)) {
                             collidedObject = logSmall;
                             collided = true;
-                        } else if (logBigR.checkCollision(sprite, 200)) {
+                        } else if (logBigR.checkCollision(sprite, 40)) {
                             collidedObject = logBigR;
                             collided = true;
-                        } else if (logBigL.checkCollision(sprite, 200)) {
+                        } else if (logBigL.checkCollision(sprite, 40)) {
                             collidedObject = logBigL;
                             collided = true;
                         }
