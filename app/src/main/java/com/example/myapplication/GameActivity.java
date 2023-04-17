@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
         //Outer loop sets up individual rows
         //Depending on row, changes tile type
         //Total Rows: 10
-        for (int i = 0; i < 10; i++) {
+        for (int r = 0; r < 10; r++) {
             LinearLayout row = new LinearLayout(this);
             gridLayout.addView(row);
             row.setOrientation(LinearLayout.HORIZONTAL);
@@ -86,11 +86,11 @@ public class GameActivity extends AppCompatActivity {
             int tileType;
             //Sets number of tiles per row
             //Total tiles per row: 8
-            for (int j = 0; j < 8; j++) {
-                if (i == 6 || i == 5 || i == 4) {
+            for (int c = 0; c < 8; c++) {
+                if (r == 6 || r == 5 || r == 4) {
                     tileType = R.drawable.road_tile;
-                } else if (i % 2 == 0 || i == 3) {
-                    if (j == 3) {
+                } else if (r % 2 == 0 || r == 3) {
+                    if (c == 3) {
                         tileType = R.drawable.grass__0;
                     } else {
                         tileType = R.drawable.water;
@@ -98,7 +98,7 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     tileType = R.drawable.grass__0;
                 }
-                if (j % 2 == 0 && i == 0) {
+                if (c % 2 == 0 && r == 0) {
                     tileType = R.drawable.tileset_brick_wall;
                 }
                 ImageView tile = new ImageView(this);
