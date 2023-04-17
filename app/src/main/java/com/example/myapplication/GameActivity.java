@@ -26,6 +26,8 @@ public class GameActivity extends AppCompatActivity {
     private MovingObject collidedObject;
     private boolean collided;
 
+    private boolean offScreen;
+
     private ArrayList<MovingObject> obstacles = new ArrayList<>();
 
     //Initialize Class
@@ -42,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         Score score = new Score();
+        offScreen = false;
 
         Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -620, 15, 15);
         Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -900, 15, 15);
@@ -175,16 +178,19 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateStats(Sprite sprite, Score score) {
-        if (sprite.checkWater() && !(collidedObject instanceof Log)) {
+        if (sprite.checkWater() && !(collidedObject instanceof Log) && !offScreen) {
             if (sprite.getLivesRemaining() > 1) {
                 pointsCounter.setText("Points: " + score.subtractScore());
                 sprite.resetToStart();
                 sprite.subtractLife();
                 livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                offScreen = true;
             } else {
                 sprite.resetLife();
                 switchToGameOverActivity(score.getScore());
             }
+        } else {
+            offScreen = false;
         }
         if (sprite.checkGoal() && sprite.getLivesRemaining() > 0) {
             pointsCounter.setText("Points: " + score.addGoalScore());
