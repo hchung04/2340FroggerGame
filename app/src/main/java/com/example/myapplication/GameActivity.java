@@ -203,7 +203,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateStats(Sprite sprite, Score score) {
-        if (sprite.checkWater()) {
+        if (sprite.checkWater() && !(collided && (collidedObject instanceof Log))) {
             if (sprite.getLivesRemaining() > 1) {
                 pointsCounter.setText("Points: " + score.subtractScore());
                 sprite.resetToStart();
