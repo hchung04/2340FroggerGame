@@ -73,5 +73,12 @@ public class SprintFiveTestCases {
         assert(logSmallSpeed != logBigLeftSpeed);
     }
 
+    @Test
+    public void isOffScreen() {
+        float x = 500;
+        float y = 274;
+        assert(Sprite.isOffScreen(x, y));
+    }
+
 
 }
