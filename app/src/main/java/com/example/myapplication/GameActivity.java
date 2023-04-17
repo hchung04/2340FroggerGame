@@ -35,57 +35,43 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
         pointsCounter = (TextView) findViewById(R.id.pointCounter);
         livesCounter = (TextView) findViewById(R.id.livesCounter);
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
-
         Score score = new Score();
-        //VEHICLES, sets starting position and scale
+
         Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -620, 15, 15);
         Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -900, 15, 15);
         Vehicle truckLeft = new Vehicle(findViewById(R.id.orangeTruck), -600, -770, 15, 15);
-        //NOTE: need to change these so that we don't concatenate with setText
-        //Use getString and set format in strings.xml instead
+
         pointsCounter.setText("Points: " + score.getScore());
-        //width and height of tiles and sprite
         int width = (int) getResources().getDimension(R.dimen.tile_width);
         int height = (int) getResources().getDimension(R.dimen.tile_height);
-
-        //LOGS, sets starting position and scale
         Log logSmall = new Log(findViewById(R.id.logSmall), -600, -1180, 15, 15);
         Log logBigR = new Log(findViewById(R.id.logBigR), -600, -1050, 15, 15);
         Log logBigL = new Log(findViewById(R.id.logBigL), -600, -370, 15, 15);
 
         Intent retrieveConfigurationData = getIntent();
-
-        //set name and level to player's choice
         String nameInput = retrieveConfigurationData.getStringExtra("name_key");
         String levelInput = retrieveConfigurationData.getStringExtra("level_key");
-
         Sprite sprite = new Sprite(findViewById(R.id.sprite),
                 retrieveConfigurationData.getParcelableExtra("player_key"), levelInput);
         sprite.setTranslationX(-55);
+
         name.setText(nameInput);
         level.setText(levelInput);
         livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-
         LinearLayout gridLayout = (LinearLayout) findViewById(R.id.grid_layout);
         ArrayList<LinearLayout> rows = new ArrayList<>();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
 
-        //Outer loop sets up individual rows
-        //Depending on row, changes tile type
-        //Total Rows: 10
         for (int rowNum = 0; rowNum < 10; rowNum++) {
             LinearLayout row = new LinearLayout(this);
             gridLayout.addView(row);
             row.setOrientation(LinearLayout.HORIZONTAL);
             rows.add(row);
             int tileType;
-            //Sets number of tiles per row
-            //Total tiles per row: 8
             for (int colNum = 0; colNum < 8; colNum++) {
                 if (rowNum == 6 || rowNum == 5 || rowNum == 4) {
                     tileType = R.drawable.road_tile;
@@ -107,8 +93,6 @@ public class GameActivity extends AppCompatActivity {
                 tile.setLayoutParams(params);
             }
         }
-
-
         int jump = (int) getResources().getDimension(R.dimen.tile_width);
         ImageView upButton = (ImageView) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
@@ -116,18 +100,11 @@ public class GameActivity extends AppCompatActivity {
                 float oldTranslation = sprite.getTranslationY();
                 sprite.moveUp(jump);
                 updateStats(sprite, score);
-                //game won
-                if (sprite.checkGoal() && sprite.getLivesRemaining() > 0) {
-                    pointsCounter.setText("Points: " + score.addGoalScore());
-                    switchToGameWonActivity(score.getScore());
-                }
-
                 if (sprite.movedUp(oldTranslation, sprite.getTranslationY())) {
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
                 }
             }
         });
-
         ImageView downButton = (ImageView) findViewById(R.id.downButton);
         downButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -135,7 +112,6 @@ public class GameActivity extends AppCompatActivity {
                 updateStats(sprite, score);
             }
         });
-
         ImageView leftButton = (ImageView) findViewById(R.id.leftButton);
         leftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -143,7 +119,6 @@ public class GameActivity extends AppCompatActivity {
                 updateStats(sprite, score);
             }
         });
-
         ImageView rightButton = (ImageView) findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -168,11 +143,11 @@ public class GameActivity extends AppCompatActivity {
                             collidedObject = carRight;
                             collided = true;
                         } else if (carLeft.checkCollision(sprite, 65)) {
-                             collidedObject = carLeft;
-                             collided = true;
+                            collidedObject = carLeft;
+                            collided = true;
                         } else if (truckLeft.checkCollision(sprite, 65)) {
-                             collidedObject = truckLeft;
-                             collided = true;
+                            collidedObject = truckLeft;
+                            collided = true;
                         } else if (logSmall.checkCollision(sprite, 40)) {
                             collidedObject = logSmall;
                             collided = true;
@@ -183,13 +158,17 @@ public class GameActivity extends AppCompatActivity {
                             collidedObject = logBigL;
                             collided = true;
                         }
-
+                        if (sprite.isOffScreen()) {
+                            updateStats(sprite, score);
+                        }
                         if (collided) {
                             if (sprite.getLivesRemaining() > 1) {
                                 sprite.dealWithCollision(collidedObject);
                                 score.resetMaxDistance();
                                 livesCounter.setText("Lives: " + sprite.getLivesRemaining());
-                                pointsCounter.setText("Points: " + score.subtractScore());
+                                if (collidedObject instanceof Vehicle) {
+                                    pointsCounter.setText("Points: " + score.subtractScore());
+                                }
                             } else {
                                 sprite.resetLife();
                                 switchToGameOverActivity(score.getScore());
@@ -213,6 +192,10 @@ public class GameActivity extends AppCompatActivity {
                 sprite.resetLife();
                 switchToGameOverActivity(score.getScore());
             }
+        }
+        if (sprite.checkGoal() && sprite.getLivesRemaining() > 0) {
+            pointsCounter.setText("Points: " + score.addGoalScore());
+            switchToGameWonActivity(score.getScore());
         }
     }
 

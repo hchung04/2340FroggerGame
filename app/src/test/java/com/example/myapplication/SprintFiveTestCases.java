@@ -67,10 +67,11 @@ public class SprintFiveTestCases {
         assert(logSmallSpeed != logBigSpeed);
     }
     @Test
-    public void logSpeed(){
+    public void logSpeed2(){
         float logSmallSpeed = 40;
         float logBigLeftSpeed = -20;
         assert(logSmallSpeed != logBigLeftSpeed);
     }
+
 
 }
