@@ -26,6 +26,10 @@ public class GameActivity extends AppCompatActivity {
     private MovingObject collidedObject;
     private boolean collided;
 
+    private boolean offScreen;
+
+    private ArrayList<MovingObject> obstacles = new ArrayList<>();
+
     //Initialize Class
     private Handler handler = new Handler(Looper.myLooper());
     private Timer timer = new Timer();
@@ -40,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         level = findViewById(R.id.level);
         Score score = new Score();
+        offScreen = false;
 
         Vehicle carRight = new Vehicle(findViewById(R.id.redCar), -600, -620, 15, 15);
         Vehicle carLeft = new Vehicle(findViewById(R.id.brownCar), -600, -900, 15, 15);
@@ -51,6 +56,13 @@ public class GameActivity extends AppCompatActivity {
         Log logSmall = new Log(findViewById(R.id.logSmall), -600, -1180, 15, 15);
         Log logBigR = new Log(findViewById(R.id.logBigR), -600, -1050, 15, 15);
         Log logBigL = new Log(findViewById(R.id.logBigL), -600, -370, 15, 15);
+
+        obstacles.add(carRight);
+        obstacles.add(carLeft);
+        obstacles.add(truckLeft);
+        obstacles.add(logSmall);
+        obstacles.add(logBigR);
+        obstacles.add(logBigL);
 
         Intent retrieveConfigurationData = getIntent();
         String nameInput = retrieveConfigurationData.getStringExtra("name_key");
@@ -76,7 +88,7 @@ public class GameActivity extends AppCompatActivity {
                 if (rowNum == 6 || rowNum == 5 || rowNum == 4) {
                     tileType = R.drawable.road_tile;
                 } else if (rowNum % 2 == 0 || rowNum == 3) {
-                    tileType = R.drawable.water;
+                        tileType = R.drawable.water;
                 } else {
                     tileType = R.drawable.grass__0;
                 }
@@ -95,6 +107,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 float oldTranslation = sprite.getTranslationY();
                 sprite.moveUp(jump);
+                checkAllCollisions(sprite, obstacles);
                 updateStats(sprite, score);
                 if (sprite.movedUp(oldTranslation, sprite.getTranslationY())) {
                     pointsCounter.setText("Points: " + score.updateScore(sprite.getTranslationY()));
@@ -105,6 +118,7 @@ public class GameActivity extends AppCompatActivity {
         downButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveDown(jump);
+                checkAllCollisions(sprite, obstacles);
                 updateStats(sprite, score);
             }
         });
@@ -112,6 +126,7 @@ public class GameActivity extends AppCompatActivity {
         leftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveLeft(jump);
+                checkAllCollisions(sprite, obstacles);
                 updateStats(sprite, score);
             }
         });
@@ -119,6 +134,7 @@ public class GameActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sprite.moveRight(jump);
+                checkAllCollisions(sprite, obstacles);
                 updateStats(sprite, score);
             }
         });
@@ -135,28 +151,12 @@ public class GameActivity extends AppCompatActivity {
                         logBigR.updateX("right", 40);
                         logBigL.updateX("left", -20);
 
-                        if (carRight.checkCollision(sprite, 65)) {
-                            collidedObject = carRight;
-                            collided = true;
-                        } else if (carLeft.checkCollision(sprite, 65)) {
-                            collidedObject = carLeft;
-                            collided = true;
-                        } else if (truckLeft.checkCollision(sprite, 65)) {
-                            collidedObject = truckLeft;
-                            collided = true;
-                        } else if (logSmall.checkCollision(sprite, 40)) {
-                            collidedObject = logSmall;
-                            collided = true;
-                        } else if (logBigR.checkCollision(sprite, 40)) {
-                            collidedObject = logBigR;
-                            collided = true;
-                        } else if (logBigL.checkCollision(sprite, 40)) {
-                            collidedObject = logBigL;
-                            collided = true;
-                        }
+                        checkAllCollisions(sprite, obstacles);
+
                         if (sprite.isOffScreen()) {
                             updateStats(sprite, score);
                         }
+
                         if (collided) {
                             if (sprite.getLivesRemaining() > 1) {
                                 sprite.dealWithCollision(collidedObject);
@@ -178,16 +178,19 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateStats(Sprite sprite, Score score) {
-        if (sprite.checkWater() && !(collided && (collidedObject instanceof Log))) {
+        if (sprite.checkWater() && !(collidedObject instanceof Log) && !offScreen) {
             if (sprite.getLivesRemaining() > 1) {
                 pointsCounter.setText("Points: " + score.subtractScore());
                 sprite.resetToStart();
                 sprite.subtractLife();
                 livesCounter.setText("Lives: " + sprite.getLivesRemaining());
+                offScreen = true;
             } else {
                 sprite.resetLife();
                 switchToGameOverActivity(score.getScore());
             }
+        } else {
+            offScreen = false;
         }
         if (sprite.checkGoal() && sprite.getLivesRemaining() > 0) {
             pointsCounter.setText("Points: " + score.addGoalScore());
@@ -195,6 +198,24 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void checkAllCollisions(Sprite sprite, ArrayList<MovingObject> obstacles) {
+        collidedObject = null;
+        collided = false;
+        for (MovingObject obs : obstacles) {
+            if (obs instanceof Vehicle) {
+                if (obs.checkCollision(sprite, 65)) {
+                    collidedObject = obs;
+                    collided = true;
+                }
+            }
+            if (obs instanceof Log) {
+                if (obs.checkCollision(sprite, 40)) {
+                    collidedObject = obs;
+                    collided = true;
+                }
+            }
+        }
+    }
 
     private void switchToGameOverActivity(int points) {
         Intent switchActivityIntent = new Intent(this, GameOverActivity.class);
