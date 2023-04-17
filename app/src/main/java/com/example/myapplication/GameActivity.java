@@ -76,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
                 if (rowNum == 6 || rowNum == 5 || rowNum == 4) {
                     tileType = R.drawable.road_tile;
                 } else if (rowNum % 2 == 0 || rowNum == 3) {
-                    tileType = R.drawable.water;
+                        tileType = R.drawable.water;
                 } else {
                     tileType = R.drawable.grass__0;
                 }

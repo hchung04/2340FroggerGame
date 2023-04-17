@@ -198,8 +198,7 @@ public class Sprite {
     }
 
     public boolean isOffScreen() {
-        return this.sprite.getTranslationX() + 50 > 493
-                || this.sprite.getTranslationX() + 50 < -466;
+        return this.sprite.getTranslationX() + 50 > 493 || this.sprite.getTranslationX() + 50 < -466;
     }
 
     //test case
