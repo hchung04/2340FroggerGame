@@ -56,11 +56,9 @@ public class Sprite {
         float x = this.sprite.getTranslationX();
         float y = this.sprite.getTranslationY();
         if (y == -274 || y == -959 || y == -1096) {
-            if (x != -55) {
-                return true;
-            }
+            return true;
         } else if (y == -1370) {
-            if (x == -329 || x == 219 || x == 493) {
+            if (x != -466 && x != -192 && x != 82 && x != 356) {
                 return true;
             }
         }
