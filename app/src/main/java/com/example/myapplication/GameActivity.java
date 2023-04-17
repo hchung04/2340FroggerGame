@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
         //Outer loop sets up individual rows
         //Depending on row, changes tile type
         //Total Rows: 10
-        for (int i = 0; i < 10; i++) {
+        for (int rowNum = 0; rowNum < 10; rowNum++) {
             LinearLayout row = new LinearLayout(this);
             gridLayout.addView(row);
             row.setOrientation(LinearLayout.HORIZONTAL);
@@ -86,11 +86,11 @@ public class GameActivity extends AppCompatActivity {
             int tileType;
             //Sets number of tiles per row
             //Total tiles per row: 8
-            for (int j = 0; j < 8; j++) {
-                if (i == 6 || i == 5 || i == 4) {
+            for (int colNum = 0; colNum < 8; colNum++) {
+                if (rowNum == 6 || rowNum == 5 || rowNum == 4) {
                     tileType = R.drawable.road_tile;
-                } else if (i % 2 == 0 || i == 3) {
-                    if (j == 3) {
+                } else if (rowNum % 2 == 0 || rowNum == 3) {
+                    if (colNum == 3) {
                         tileType = R.drawable.grass__0;
                     } else {
                         tileType = R.drawable.water;
@@ -98,7 +98,7 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     tileType = R.drawable.grass__0;
                 }
-                if (j % 2 == 0 && i == 0) {
+                if (colNum % 2 == 0 && rowNum == 0) {
                     tileType = R.drawable.tileset_brick_wall;
                 }
                 ImageView tile = new ImageView(this);
@@ -173,13 +173,13 @@ public class GameActivity extends AppCompatActivity {
                         } else if (truckLeft.checkCollision(sprite, 65)) {
                              collidedObject = truckLeft;
                              collided = true;
-                        } else if (logSmall.checkCollision(sprite, 200)) {
+                        } else if (logSmall.checkCollision(sprite, 40)) {
                             collidedObject = logSmall;
                             collided = true;
-                        } else if (logBigR.checkCollision(sprite, 200)) {
+                        } else if (logBigR.checkCollision(sprite, 40)) {
                             collidedObject = logBigR;
                             collided = true;
-                        } else if (logBigL.checkCollision(sprite, 200)) {
+                        } else if (logBigL.checkCollision(sprite, 40)) {
                             collidedObject = logBigL;
                             collided = true;
                         }
@@ -203,7 +203,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateStats(Sprite sprite, Score score) {
-        if (sprite.checkWater()) {
+        if (sprite.checkWater() && !(collided && (collidedObject instanceof Log))) {
             if (sprite.getLivesRemaining() > 1) {
                 pointsCounter.setText("Points: " + score.subtractScore());
                 sprite.resetToStart();

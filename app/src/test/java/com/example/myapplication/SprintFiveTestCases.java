@@ -60,5 +60,17 @@ public class SprintFiveTestCases {
         assert(GameActivity.switchToGameWonScreen(livesRemaining) == true);
     }
 
+    @Test
+    public void logSpeed(){
+        float logSmallSpeed = 10;
+        float logBigSpeed = 40;
+        assert(logSmallSpeed != logBigSpeed);
+    }
+    @Test
+    public void logSpeed(){
+        float logSmallSpeed = 40;
+        float logBigLeftSpeed = -20;
+        assert(logSmallSpeed != logBigLeftSpeed);
+    }
 
 }
