@@ -57,15 +57,15 @@ public class MovingObject {
     }
 
     public boolean checkCollision(Sprite sprite, int offset) {
-        boolean xEqual = Math.abs(sprite.getX() - this.movingObject.getX()) <= offset;
+        //boolean xEqual = Math.abs(sprite.getX() - this.movingObject.getX()) <= offset;
+        boolean xEqual = this.movingObject.getX() - offset - this.movingObject.getWidth()<= sprite.getX() &&
+               sprite.getX() <= this.movingObject.getX() + offset + this.movingObject.getWidth();
         boolean yEqual;
         if (this instanceof Log) {
             yEqual = Math.abs(sprite.getY() - (this.movingObject.getY() - 30)) <= offset;
         } else {
             yEqual = Math.abs(sprite.getY() - this.movingObject.getY()) <= offset;
         }
-        //System.out.println("Sprite: " + sprite.getY());
-        //System.out.println("Obj: " + this.movingObject.getY());
         return xEqual && yEqual;
     }
 

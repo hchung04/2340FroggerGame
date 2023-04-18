@@ -202,17 +202,9 @@ public class GameActivity extends AppCompatActivity {
         collidedObject = null;
         collided = false;
         for (MovingObject obs : obstacles) {
-            if (obs instanceof Vehicle) {
-                if (obs.checkCollision(sprite, 65)) {
-                    collidedObject = obs;
-                    collided = true;
-                }
-            }
-            if (obs instanceof Log) {
-                if (obs.checkCollision(sprite, 40)) {
-                    collidedObject = obs;
-                    collided = true;
-                }
+            if (obs.checkCollision(sprite, 65)) {
+                collidedObject = obs;
+                collided = true;
             }
         }
     }
