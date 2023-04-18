@@ -57,7 +57,7 @@ public class MovingObject {
     }
 
     public boolean checkCollision(Sprite sprite, int offset) {
-        boolean xEqual = this.movingObject.getX() - this.movingObject.getWidth()<= sprite.getX() &&
+        boolean xEqual = this.movingObject.getX() - this.movingObject.getWidth() <= sprite.getX() &&
                sprite.getX() <= this.movingObject.getX() + this.movingObject.getWidth();
         boolean yEqual;
         if (this instanceof Log) {

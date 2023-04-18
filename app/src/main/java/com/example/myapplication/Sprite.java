@@ -55,10 +55,11 @@ public class Sprite {
     public boolean checkWater() {
         float x = this.sprite.getTranslationX();
         float y = this.sprite.getTranslationY();
+        float xAdjusted = Math.abs(x - 137);
         if (y == -274 || y == -959 || y == -1096) {
             return true;
         } else if (y == -1370) {
-            if (x != -466 && x != -192 && x != 82 && x != 356) {
+            if (xAdjusted >= -466 && xAdjusted >= -192 && xAdjusted >= 82 && xAdjusted >= 356) {
                 return true;
             }
         }
@@ -67,8 +68,9 @@ public class Sprite {
     public boolean checkGoal() {
         float x = this.sprite.getTranslationX();
         float y = this.sprite.getTranslationY();
+        float xAdjusted = Math.abs(x - 137);
         if (y == -1370) {
-            if (x == -466 || x == -192 || x == 82 || x == 356) {
+            if (xAdjusted <= -466 || xAdjusted <= -192 || xAdjusted <= 82 || xAdjusted <= 356) {
                 return true;
             }
         }
