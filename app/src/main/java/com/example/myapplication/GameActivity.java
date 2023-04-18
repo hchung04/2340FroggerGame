@@ -148,8 +148,8 @@ public class GameActivity extends AppCompatActivity {
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
                         logSmall.updateX("right", 10);
-                        logBigL.updateX("left", -40);
-                        logBigR.updateX("right", 20);
+                        logBigL.updateX("right", -20);
+                        logBigR.updateX("left", 40);
 
                         checkAllCollisions(sprite, obstacles);
 
