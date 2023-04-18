@@ -149,14 +149,14 @@
         app:srcCompat="@drawable/log1" />
 
     <ImageView
-        android:id="@+id/logBigR"
+        android:id="@+id/logBigL"
         android:layout_width="49dp"
         android:layout_height="2dp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/log2" />
 
     <ImageView
-        android:id="@+id/logBigL"
+        android:id="@+id/logBigR"
         android:layout_width="49dp"
         android:layout_height="2dp"
         android:layout_gravity="center"
