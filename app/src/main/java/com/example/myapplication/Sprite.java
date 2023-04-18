@@ -93,9 +93,9 @@ public class Sprite {
 
     public int setLives(String level) {
         if (level.equals("Easy")) {
-            return 3;
+            return 5;
         } else if (level.equals("Medium")) {
-            return 2;
+            return 3;
         } else {
             return 1;
         }
