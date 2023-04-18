@@ -179,13 +179,14 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateStats(Sprite sprite, Score score) {
         if (sprite.checkWater() && !(collidedObject instanceof Log) && !offScreen) {
-            if (sprite.getLivesRemaining() > 1) {
+            if (sprite.getLivesRemaining() > 0) {
                 pointsCounter.setText("Points: " + score.subtractScore());
                 sprite.resetToStart();
                 sprite.subtractLife();
                 livesCounter.setText("Lives: " + sprite.getLivesRemaining());
                 offScreen = true;
-            } else {
+            }
+            if(sprite.getLivesRemaining() == 0){
                 sprite.resetLife();
                 switchToGameOverActivity(score.getScore());
             }
