@@ -54,8 +54,8 @@ public class GameActivity extends AppCompatActivity {
         int width = (int) getResources().getDimension(R.dimen.tile_width);
         int height = (int) getResources().getDimension(R.dimen.tile_height);
         Log logSmall = new Log(findViewById(R.id.logSmall), -600, -1180, 15, 15);
-        Log logBigR = new Log(findViewById(R.id.logBigR), -600, -1050, 15, 15);
-        Log logBigL = new Log(findViewById(R.id.logBigL), -600, -370, 15, 15);
+        Log logBigL = new Log(findViewById(R.id.logBigR), -600, -1050, 15, 15);
+        Log logBigR = new Log(findViewById(R.id.logBigL), -600, -370, 15, 15);
 
         obstacles.add(carRight);
         obstacles.add(carLeft);
@@ -148,8 +148,8 @@ public class GameActivity extends AppCompatActivity {
                         carLeft.updateX("left", -50);
                         truckLeft.updateX("left", -70);
                         logSmall.updateX("right", 10);
-                        logBigR.updateX("right", 40);
-                        logBigL.updateX("left", -20);
+                        logBigL.updateX("right", -20);
+                        logBigR.updateX("left", 40);
 
                         checkAllCollisions(sprite, obstacles);
 
