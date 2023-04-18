@@ -158,14 +158,15 @@ public class GameActivity extends AppCompatActivity {
                         }
 
                         if (collided) {
-                            if (sprite.getLivesRemaining() > 1) {
+                            if (sprite.getLivesRemaining() > 0) {
                                 sprite.dealWithCollision(collidedObject);
                                 score.resetMaxDistance();
                                 livesCounter.setText("Lives: " + sprite.getLivesRemaining());
                                 if (collidedObject instanceof Vehicle) {
                                     pointsCounter.setText("Points: " + score.subtractScore());
                                 }
-                            } else {
+                            }
+                            if(sprite.getLivesRemaining() == 0) {
                                 sprite.resetLife();
                                 switchToGameOverActivity(score.getScore());
                             }
@@ -192,10 +193,6 @@ public class GameActivity extends AppCompatActivity {
             }
         } else {
             offScreen = false;
-        }
-        if (sprite.checkGoal() && sprite.getLivesRemaining() > 0) {
-            pointsCounter.setText("Points: " + score.addGoalScore());
-            switchToGameWonActivity(score.getScore());
         }
     }
 
