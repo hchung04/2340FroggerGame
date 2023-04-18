@@ -70,6 +70,8 @@ public class GameActivity extends AppCompatActivity {
         Sprite sprite = new Sprite(findViewById(R.id.sprite),
                 retrieveConfigurationData.getParcelableExtra("player_key"), levelInput);
         sprite.setTranslationX(-55);
+        // for testing - sets sprite at row below goal tiles
+        // sprite.setTranslationY(-1233);
 
         name.setText(nameInput);
         level.setText(levelInput);
