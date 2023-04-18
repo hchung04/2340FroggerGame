@@ -71,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
                 retrieveConfigurationData.getParcelableExtra("player_key"), levelInput);
         sprite.setTranslationX(-55);
         // for testing - sets sprite at row below goal tiles
-        // sprite.setTranslationY(-1233);
+        sprite.setTranslationY(-1233);
 
         name.setText(nameInput);
         level.setText(levelInput);
@@ -160,14 +160,15 @@ public class GameActivity extends AppCompatActivity {
                         }
 
                         if (collided) {
-                            if (sprite.getLivesRemaining() > 1) {
+                            if (sprite.getLivesRemaining() > 0) {
                                 sprite.dealWithCollision(collidedObject);
                                 score.resetMaxDistance();
                                 livesCounter.setText("Lives: " + sprite.getLivesRemaining());
                                 if (collidedObject instanceof Vehicle) {
                                     pointsCounter.setText("Points: " + score.subtractScore());
                                 }
-                            } else {
+                            }
+                            if (sprite.getLivesRemaining() == 0) {
                                 sprite.resetLife();
                                 switchToGameOverActivity(score.getScore());
                             }
@@ -181,14 +182,13 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateStats(Sprite sprite, Score score) {
         if (sprite.checkWater() && !(collidedObject instanceof Log) && !offScreen) {
-            if (sprite.getLivesRemaining() > 0) {
+            if (sprite.getLivesRemaining() > 1) {
                 pointsCounter.setText("Points: " + score.subtractScore());
                 sprite.resetToStart();
                 sprite.subtractLife();
                 livesCounter.setText("Lives: " + sprite.getLivesRemaining());
                 offScreen = true;
-            }
-            if(sprite.getLivesRemaining() == 0){
+            } else {
                 sprite.resetLife();
                 switchToGameOverActivity(score.getScore());
             }
